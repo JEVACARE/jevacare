@@ -2,25 +2,16 @@ import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 
 const app = express();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 app.use(cors());
 app.use(express.json());
 
-// Serve all your frontend files (HTML, CSS, JS, images, icons, etc.)
-app.use(express.static(__dirname));
-
-// Main page
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "home.html"));
+  res.send("Nanipal AI Backend is running 🚀");
 });
 
 app.post("/chat", async (req, res) => {
@@ -135,7 +126,7 @@ You are not just a chatbot — you are a **smart healthcare assistant integrated
         model: "openai/gpt-3.5-turbo",
         messages: [
           { role: "system", content: systemPrompt },
-          ...(req.body.history || []),
+          ...req.body.history || [],   // 👈 supports memory later
           { role: "user", content: userMessage }
         ]
       })
@@ -159,20 +150,6 @@ You are not just a chatbot — you are a **smart healthcare assistant integrated
   }
 });
 
-// Optional direct routes for your pages
-app.get("/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "home.html"));
-});
-
-app.get("/chatpage", (req, res) => {
-  res.sendFile(path.join(__dirname, "chat.html"));
-});
-
-app.get("/appointment", (req, res) => {
-  res.sendFile(path.join(__dirname, "appointment.html"));
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
 });
