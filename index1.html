@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Health – Jevacare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="Pcss/index1.css" />
+  </head>
+  <body>
+    <!-- Inline SVG icon set (no external .svg files) -->
+    <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="i-calendar" viewBox="0 0 24 24">
+        <rect x="3" y="4.5" width="18" height="16.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.8" />
+        <path d="M8 3v3.5M16 3v3.5M3 9h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8" />
+        <path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="i-truck" viewBox="0 0 24 24">
+        <path
+          d="M3 7h11v10H3zM14 10h3.5l3 3V17H14z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linejoin="round"
+        />
+        <path d="M7 17a1.6 1.6 0 1 0 0.01 0zM18 17a1.6 1.6 0 1 0 0.01 0z" fill="currentColor" />
+      </symbol>
+      <symbol id="i-user" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8" />
+        <path d="M4.5 21a7.5 7.5 0 0 1 15 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24">
+        <path
+          d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path d="M13.8 21a2 2 0 0 1-3.6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path
+          d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linejoin="round"
+        />
+      </symbol>
+      <symbol id="i-card" viewBox="0 0 24 24">
+        <rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.8" />
+        <path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24">
+        <path
+          d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linejoin="round"
+        />
+        <circle cx="12" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="1.8" />
+      </symbol>
+      <symbol id="i-pill" viewBox="0 0 24 24">
+        <path
+          d="M9.4 20.6a5 5 0 0 1 0-7.1l4.1-4.1a5 5 0 0 1 7.1 7.1l-4.1 4.1a5 5 0 0 1-7.1 0z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        />
+        <path d="M14.2 7.8l6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24">
+        <path
+          d="M21 15a2 2 0 0 1-2 2H8l-5 5V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linejoin="round"
+        />
+      </symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24">
+        <path
+          d="M12 15.6a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        />
+        <path
+          d="M19.4 12a7.7 7.7 0 0 0-.1-1l2-1.5-2-3.5-2.4.9a8 8 0 0 0-1.7-1l-.4-2.5H9.2l-.4 2.5a8 8 0 0 0-1.7 1l-2.4-.9-2 3.5 2 1.5a7.7 7.7 0 0 0-.1 1c0 .34.03.67.08 1l-2 1.5 2 3.5 2.4-.9c.53.4 1.1.74 1.7 1l.4 2.5h5.6l.4-2.5c.6-.26 1.17-.6 1.7-1l2.4.9 2-3.5-2-1.5c.05-.33.08-.66.08-1z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.2"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+        />
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24">
+        <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+      </symbol>
+      <symbol id="i-x" viewBox="0 0 24 24">
+        <path d="M18 6L6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+      </symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+      </symbol>
+    </svg>
+
+    <div class="page-wrapper">
+      <!-- NAVBAR -->
+      <nav class="navigation" aria-label="Primary">
+        <div class="nav-inner">
+          <div class="nav-buttons-left">
+            <a class="logo-box" href="home.html" aria-label="Jevacare home">
+              <img src="assets/logo.png" class="logo">
+              <span class="brand-name">Jevacare</span>
+            </a>
+
+            <ul class="nav-links">
+              <li>
+                <a href="appointment.html">
+                  <svg class="nav-ic" aria-hidden="true"><use href="#i-calendar"></use></svg>
+                  <span>Appointments</span>
+                </a>
+              </li>
+              <li>
+                <a href="Map.html">
+                  <svg class="nav-ic" aria-hidden="true"><use href="#i-truck"></use></svg>
+                  <span>Track Delivery</span>
+                </a>
+              </li>
+              <li>
+                <a href="index1.html" class="nav-active">
+                  <svg class="nav-ic" aria-hidden="true"><use href="#i-user"></use></svg>
+                  <span>My Health</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="nav-buttons-right">
+            <button class="nav-icon-btn" type="button" aria-label="Notifications">
+              <svg class="nav-ic" aria-hidden="true"><use href="#i-bell"></use></svg>
+            </button>
+            <div class="separator" aria-hidden="true"></div>
+            <div class="user-info">
+              <span class="user-name">Sarah Ama</span>
+              <small>Premium Member</small>
+            </div>
+            <a href="#" class="profile-link" aria-label="Profile">
+              <svg class="profile-ic" aria-hidden="true"><use href="#i-user"></use></svg>
+            </a>
+          </div>
+
+          <!-- mobile hamburger -->
+          <button class="hamburger" id="hamburger" type="button" aria-label="Open menu">
+            <svg class="nav-ic" aria-hidden="true"><use href="#i-menu"></use></svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- mobile nav drawer -->
+      <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile menu" aria-hidden="true">
+        <button class="drawer-close" id="drawerClose" type="button" aria-label="Close menu">
+          <svg class="nav-ic" aria-hidden="true"><use href="#i-x"></use></svg>
+        </button>
+
+        <div class="drawer-user">
+          <div class="drawer-avatar" aria-hidden="true">
+            <svg class="drawer-avatar-ic"><use href="#i-user"></use></svg>
+          </div>
+          <div>
+            <div class="drawer-name">Sarah Ama</div>
+            <div class="drawer-sub">Premium Member</div>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-label">Navigation</div>
+          <a class="drawer-link" href="appointment.html">
+            <svg class="nav-ic" aria-hidden="true"><use href="#i-calendar"></use></svg>
+            Appointments
+          </a>
+          <a class="drawer-link" href="Map.html">
+            <svg class="nav-ic" aria-hidden="true"><use href="#i-truck"></use></svg>
+            Track Delivery
+          </a>
+          <a class="drawer-link is-active" href="index1.html">
+            <svg class="nav-ic" aria-hidden="true"><use href="#i-user"></use></svg>
+            My Health
+          </a>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-label">My Health</div>
+          <a class="drawer-link" href="#appointments">
+            <svg class="nav-ic" aria-hidden="true"><use href="#i-calendar"></use></svg>
+            Appointments
+          </a>
+          <a class="drawer-link" href="#prescriptions">
+            <svg class="nav-ic" aria-hidden="true"><use href="#i-pill"></use></svg>
+            Prescriptions
+          </a>
+          <a class="drawer-link" href="#accountSettings">
+            <svg class="nav-ic" aria-hidden="true"><use href="#i-gear"></use></svg>
+            Account Settings
+          </a>
+        </div>
+
+        <a class="drawer-help" href="chat.html">
+          <div class="drawer-help-ic" aria-hidden="true">
+            <svg class="nav-ic"><use href="#i-chat"></use></svg>
+          </div>
+          <div class="drawer-help-text">
+            <div class="drawer-help-title">Need Help?</div>
+            <div class="drawer-help-sub">Launch Nanipal Assistant</div>
+          </div>
+        </a>
+      </aside>
+      <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main-layout container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="left-sidebar" aria-label="Profile and sections">
+          <div class="doctor-profile">
+            <div class="profile-avatar-wrap">
+              <img src="images/Doctor10.jpeg" alt="Sarah Ama" class="profile-photo" />
+              <button class="avatar-gear" type="button" aria-label="Profile settings">
+                <svg aria-hidden="true"><use href="#i-gear"></use></svg>
+              </button>
+            </div>
+            <div class="profile-name">Sarah Ama</div>
+            <div class="profile-email">sarah.j@example.com</div>
+
+            <div class="doctor-button">
+              <div class="doctor-button1">
+                <div class="stat-label">BLOOD</div>
+                <div class="stat-value">A+</div>
+              </div>
+              <div class="doctor-button2">
+                <div class="stat-label">TIER</div>
+                <div class="stat-value">Gold</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="side-buttons">
+            <ul>
+              <li class="side-item active-item">
+                <a href="#">
+                  <svg class="side-ic" aria-hidden="true"><use href="#i-user"></use></svg>
+                  <span>Profile Overview</span>
+                </a>
+              </li>
+              <li class="side-item">
+                <a href="#appointments">
+                  <svg class="side-ic" aria-hidden="true"><use href="#i-calendar"></use></svg>
+                  <span>Appointments</span>
+                </a>
+              </li>
+              <li class="side-item">
+                <a href="#prescriptions">
+                  <svg class="side-ic" aria-hidden="true"><use href="#i-pill"></use></svg>
+                  <span>Prescriptions</span>
+                </a>
+              </li>
+              <li class="side-item">
+                <a href="#">
+                  <svg class="side-ic" aria-hidden="true"><use href="#i-card"></use></svg>
+                  <span>Billing &amp; Payments</span>
+                </a>
+              </li>
+              <li class="side-item">
+                <a href="#">
+                  <svg class="side-ic" aria-hidden="true"><use href="#i-pin"></use></svg>
+                  <span>Saved Addresses</span>
+                </a>
+              </li>
+              <li class="side-item">
+                <a href="#">
+                  <svg class="side-ic" aria-hidden="true"><use href="#i-shield"></use></svg>
+                  <span>Privacy &amp; Security</span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="help-box">
+              <div class="help-head">
+                <div class="help-ic" aria-hidden="true">
+                  <svg class="side-ic"><use href="#i-chat"></use></svg>
+                </div>
+                <span>Need Help?</span>
+              </div>
+              <p>Ask Nanipal about your health records or find specialists nearby.</p>
+              <a href="chat.html" target="_blank" rel="noreferrer">Launch Assistant →</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- RIGHT CONTENT -->
+        <div class="right-content">
+          <div class="section-heading" id="appointments">Your Appointments</div>
+
+          <div class="cards-row" aria-label="Appointments">
+            <div class="appt-card" data-status="upcoming">
+              <div class="card-top">
+                <div class="doc-avatar" aria-hidden="true">
+                  <svg class="doc-ic"><use href="#i-user"></use></svg>
+                </div>
+                <div class="card-doc-meta">
+                  <p class="card-doctor">Dr. Marcus Thorne</p>
+                  <span class="card-specialty">Cardiologist</span>
+                </div>
+                <span class="status-badge upcoming">upcoming</span>
+              </div>
+
+              <div class="card-row">
+                <svg class="meta-ic" aria-hidden="true"><use href="#i-calendar"></use></svg>
+                <p>Tomorrow, Oct 24</p>
+              </div>
+              <div class="card-row">
+                <svg class="meta-ic" aria-hidden="true"><use href="#i-clock"></use></svg>
+                <p>10:30 AM</p>
+              </div>
+
+              <div class="card-actions">
+                <button class="btn-chip btn-outline btn-view" type="button">View Clinic</button>
+                <button class="btn-chip btn-outline btn-reschedule" type="button">Reschedule</button>
+              </div>
+            </div>
+
+            <div class="appt-card" data-status="telehealth">
+              <div class="card-top">
+                <div class="doc-avatar" aria-hidden="true">
+                  <svg class="doc-ic"><use href="#i-user"></use></svg>
+                </div>
+                <div class="card-doc-meta">
+                  <p class="card-doctor">Dr. Elena Rodriguez</p>
+                  <span class="card-specialty">Dermatologist</span>
+                </div>
+                <span class="status-badge telehealth">telehealth</span>
+              </div>
+
+              <div class="card-row">
+                <svg class="meta-ic" aria-hidden="true"><use href="#i-calendar"></use></svg>
+                <p>Fri, Oct 27</p>
+              </div>
+              <div class="card-row">
+                <svg class="meta-ic" aria-hidden="true"><use href="#i-clock"></use></svg>
+                <p>2:15 PM</p>
+              </div>
+
+              <div class="card-actions">
+                <button class="btn-chip btn-outline btn-view" type="button">View Clinic</button>
+                <button class="btn-chip btn-outline btn-reschedule" type="button">Reschedule</button>
+              </div>
+            </div>
+
+            <div class="appt-card" data-status="completed">
+              <div class="card-top">
+                <div class="doc-avatar" aria-hidden="true">
+                  <svg class="doc-ic"><use href="#i-user"></use></svg>
+                </div>
+                <div class="card-doc-meta">
+                  <p class="card-doctor">Dr. James Wilson</p>
+                  <span class="card-specialty">General Practitioner</span>
+                </div>
+                <span class="status-badge completed">completed</span>
+              </div>
+
+              <div class="card-row">
+                <svg class="meta-ic" aria-hidden="true"><use href="#i-calendar"></use></svg>
+                <p>Completed Oct 15</p>
+              </div>
+              <div class="card-row">
+                <svg class="meta-ic" aria-hidden="true"><use href="#i-clock"></use></svg>
+                <p>09:00 AM</p>
+              </div>
+
+              <div class="card-actions">
+                <button class="btn-chip btn-outline btn-view" type="button">View Clinic</button>
+                <button class="btn-chip btn-outline btn-reschedule" type="button">Reschedule</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="active-prescriptions" id="prescriptions">
+            <div class="pres-header">
+              <div class="pres-title">
+                <svg class="pres-ic" aria-hidden="true"><use href="#i-pill"></use></svg>
+                <span>Active Prescriptions</span>
+              </div>
+              <a href="Map.html">Track Deliveries</a>
+            </div>
+
+            <div class="pres-row">
+              <div class="pres-left">
+                <div class="pill-avatar" aria-hidden="true">
+                  <svg class="pres-ic"><use href="#i-pill"></use></svg>
+                </div>
+                <div>
+                  <span class="drug-name">Lisinopril</span>
+                  <small>10mg • Once daily</small>
+                </div>
+              </div>
+              <div class="pres-right">
+                <div class="refill-meta">
+                  <small>REFILLS</small>
+                  <b class="refill-count ok">3 Left</b>
+                </div>
+                <button class="refill-btn" type="button">Refill Now</button>
+              </div>
+            </div>
+
+            <div class="pres-row">
+              <div class="pres-left">
+                <div class="pill-avatar" aria-hidden="true">
+                  <svg class="pres-ic"><use href="#i-pill"></use></svg>
+                </div>
+                <div>
+                  <span class="drug-name">Atorvastatin</span>
+                  <small>20mg • At bedtime</small>
+                </div>
+              </div>
+              <div class="pres-right">
+                <div class="refill-meta">
+                  <small>REFILLS</small>
+                  <b class="refill-count empty">0 Left</b>
+                </div>
+                <button class="refill-btn ghost" type="button">Request Renewal</button>
+              </div>
+            </div>
+
+            <div class="pres-row">
+              <div class="pres-left">
+                <div class="pill-avatar" aria-hidden="true">
+                  <svg class="pres-ic"><use href="#i-pill"></use></svg>
+                </div>
+                <div>
+                  <span class="drug-name">Amoxicillin</span>
+                  <small>500mg • Three times daily</small>
+                </div>
+              </div>
+              <div class="pres-right">
+                <div class="refill-meta">
+                  <small>REFILLS</small>
+                  <b class="refill-count ok">1 Left</b>
+                </div>
+                <button class="refill-btn" type="button">Refill Now</button>
+              </div>
+            </div>
+
+            <button class="view-history-btn" type="button">View Full Prescription History</button>
+          </div>
+        </div>
+        <!-- /right content -->
+      </div>
+      <!-- /main layout -->
+
+      <!-- ACCOUNT SETTINGS SECTION -->
+      <div class="bottom-section container" id="accountSettings">
+        <div class="section-label">
+          <b>Account Settings</b>
+          <span>Manage your contact information, security preferences, and data privacy.</span>
+        </div>
+
+        <!-- Personal Information -->
+        <details class="settings-card accordion" open>
+          <summary class="accordion-summary">
+            <div class="settings-card-head">
+              <div class="settings-ic" aria-hidden="true">
+                <svg><use href="#i-user"></use></svg>
+              </div>
+              <div>
+                <p>Personal Information</p>
+                <span>Update your legal name, birthday, and contact details.</span>
+              </div>
+            </div>
+            <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+          </summary>
+
+          <div class="accordion-body">
+            <form class="info-form" id="profileForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fullName">Legal Full Name</label>
+                  <input type="text" id="fullName" class="form-input" value="Sarah Johnson" />
+                </div>
+                <div class="form-group">
+                  <label for="emailAddr">Email Address</label>
+                  <input type="email" id="emailAddr" class="form-input" value="sarah.j@example.com" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="insurance">Primary Insurance</label>
+                  <input type="text" id="insurance" class="form-input" value="BlueShield Premier" />
+                </div>
+                <div class="form-group">
+                  <label for="bloodType">Blood Type</label>
+                  <input type="text" id="bloodType" class="form-input" value="A+" />
+                </div>
+              </div>
+            </form>
+
+            <div class="form-actions">
+              <button class="btn-cancel" id="cancelBtn" type="button">Cancel Changes</button>
+              <button class="btn-save" id="saveBtn" type="button">Save Profile</button>
+            </div>
+
+            <div class="save-toast" id="saveToast">✓ Profile saved successfully!</div>
+          </div>
+        </details>
+
+        <!-- Notification Preferences -->
+        <details class="settings-card accordion" open>
+          <summary class="accordion-summary">
+            <div class="settings-card-head">
+              <div class="settings-ic" aria-hidden="true">
+                <svg><use href="#i-bell"></use></svg>
+              </div>
+              <div>
+                <p>Notification Preferences</p>
+                <span>Choose how and when you want to be contacted.</span>
+              </div>
+            </div>
+            <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+          </summary>
+
+          <div class="accordion-body">
+            <div class="notif-list">
+              <div class="notif-item notif-card">
+                <div class="notif-text">
+                  <h4>Appointment Reminders</h4>
+                  <p>Push and SMS alerts for upcoming visits.</p>
+                </div>
+                <label class="toggle-switch" aria-label="Appointment reminders">
+                  <input type="checkbox" checked />
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="notif-item notif-card">
+                <div class="notif-text">
+                  <h4>Prescription Updates</h4>
+                  <p>Status changes for your medication delivery.</p>
+                </div>
+                <label class="toggle-switch" aria-label="Prescription updates">
+                  <input type="checkbox" checked />
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="notif-item notif-card">
+                <div class="notif-text">
+                  <h4>Security Alerts</h4>
+                  <p>Notifications for login attempts or data changes.</p>
+                </div>
+                <label class="toggle-switch" aria-label="Security alerts">
+                  <input type="checkbox" checked />
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Security -->
+        <details class="settings-card accordion">
+          <summary class="accordion-summary">
+            <div class="settings-card-head">
+              <div class="settings-ic" aria-hidden="true">
+                <svg><use href="#i-shield"></use></svg>
+              </div>
+              <div>
+                <p>Security &amp; Password</p>
+                <span>Manage your credentials and active sessions.</span>
+              </div>
+            </div>
+            <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+          </summary>
+          <div class="accordion-body">
+            <div class="security-row">
+              <p>Review your password, devices, and recent sign-ins.</p>
+              <button class="btn-manage" id="securityBtn" type="button">Manage</button>
+            </div>
+          </div>
+        </details>
+
+        <!-- Payment + Delivery -->
+        <div class="settings-grid">
+          <div class="settings-card">
+            <div class="settings-card-head settings-card-head-row">
+              <div class="settings-ic" aria-hidden="true">
+                <svg><use href="#i-card"></use></svg>
+              </div>
+              <div>
+                <p>Payment Methods</p>
+                <span>Manage your saved cards.</span>
+              </div>
+              <a href="#" class="add-new-link">Add New</a>
+            </div>
+
+            <div class="payment-list">
+              <div class="payment-item">
+                <div class="pay-ic" aria-hidden="true">
+                  <span class="visa-badge">VISA</span>
+                </div>
+                <div>
+                  <p>Visa ending in 4242</p>
+                  <small>Expires 09/26 • Default</small>
+                </div>
+                <button class="dots-btn" id="visaDotsBtn" type="button" aria-label="Payment options">⋮</button>
+                <div class="dots-menu" id="visaMenu">
+                  <a href="#">Edit</a>
+                  <a href="#">Set as Default</a>
+                  <a href="#" class="remove-link">Remove</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <div class="settings-card-head settings-card-head-row">
+              <div class="settings-ic" aria-hidden="true">
+                <svg><use href="#i-pin"></use></svg>
+              </div>
+              <div>
+                <p>Delivery Addresses</p>
+                <span>Saved delivery locations.</span>
+              </div>
+            </div>
+
+            <div class="payment-list">
+              <div class="payment-item">
+                <div class="pay-ic" aria-hidden="true">
+                  <svg class="side-ic"><use href="#i-pin"></use></svg>
+                </div>
+                <div>
+                  <p>Home Address</p>
+                  <small>123 Willow Ln, Seattle, WA 98101</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /bottom-section -->
+
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <div class="footer-inner container">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              
+              <span class="footer-name">Jevacare</span>
+            </div>
+            <p>Revolutionizing healthcare access through technology and human-centered design.</p>
+          </div>
+
+          <div class="footer-links">
+            <div class="footer-col">
+              <b>Services</b>
+              <a href="jevacare-doctors.html">Find Specialists</a>
+              <a href="jevacare-pharmacy.html">Pharmacy Delivery</a>
+              <a href="#">Telehealth</a>
+            </div>
+            <div class="footer-col">
+              <b>Support</b>
+              <a href="#">Help Center</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Contact Us</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom container">
+          <small>© 2026 Jevacare. All rights reserved.</small>
+          <div class="footer-legal">
+            <a href="#">Terms of Service</a>
+            <a href="#">Security</a>
+          </div>
+        </div>
+      </footer>
+
+      <a class="chat-fab" href="chat.html" aria-label="Chat with Nanipal">
+        <svg aria-hidden="true"><use href="#i-chat"></use></svg>
+      </a>
+    </div>
+
+    <script src="javascript/index1.js"></script>
+  </body>
+</html>
+

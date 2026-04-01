@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Alexei Arisov | Jevacare</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="Pcss/last.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="index.html" class="brand">
+    <img src="images/logo.jpeg" alt="JevaCare Logo" class="logo-img">
+      <span class="brand-name">JevaCare</span>
+  </a>
+
+  <ul class="nav-menu">
+    <li>
+      <a href="#">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="4" width="14" height="13" rx="2"/>
+          <path d="M7 2v4M13 2v4M3 9h14"/>
+        </svg>
+        Appointments
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="10" cy="10" r="7"/>
+          <path d="M10 6v4l2.5 2.5"/>
+        </svg>
+        Track Delivery
+      </a>
+    </li>
+    <li>
+      <a href="#" class="active">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M10 2a5 5 0 015 5c0 3.5-5 10-5 10S5 10.5 5 7a5 5 0 015-5z"/>
+          <circle cx="10" cy="7" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+        My Health
+      </a>
+    </li>
+  </ul>
+
+  <div class="nav-end">
+    <button class="notif-btn" onclick="showToast('No new notifications')">
+      <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M10 2a6 6 0 016 6c0 3 1.5 4 1.5 4H2.5S4 11 4 8a6 6 0 016-6z"/>
+        <path d="M8.5 17a1.5 1.5 0 003 0"/>
+      </svg>
+      <span class="notif-dot"></span>
+    </button>
+    <a href="index.html" class="btn-signin">Sign In</a>
+  </div>
+</nav>
+
+
+<div class="wrapper">
+  <div class="content-grid">
+
+    <!-- left side -->
+    <div class="main-content">
+
+      <!-- top profile card -->
+      <div class="profile-top">
+        <div class="profile-bg-layer"></div>
+        <div class="profile-flex">
+
+          <!-- doctor image placeholder - drop your image here -->
+          <div class="doc-avatar-box">
+            <img src="images/Doctor12_Physician.jpeg" alt="Dr. Jerry" class="doctor-photo">
+          </div>
+
+          <div class="doc-info">
+            <div class="tag-row">
+              <span class="tag blue-tag">Board Certified Neurologist</span>
+              <span class="tag gray-tag">Specialist</span>
+            </div>
+            <h1>Dr. Alexei <em>Arisov</em></h1>
+            <p class="doc-desc">Specializing in advanced neuro-rehabilitation and neuro-degenerative disorders with over 15 years of clinical excellence.</p>
+            <div class="doc-details">
+              <span>
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M10 2a5 5 0 015 5c0 3.5-5 10-5 10S5 10.5 5 7a5 5 0 015-5z"/>
+                  <circle cx="10" cy="7" r="1.5" fill="currentColor" stroke="none"/>
+                </svg>
+                Seattle Medical Center, WA
+              </span>
+              <span>
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M4 6h12M4 10h8M4 14h5"/>
+                  <rect x="2" y="3" width="16" height="14" rx="2"/>
+                </svg>
+                English, German, Russian
+              </span>
+              <span>
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="2" y="2" width="16" height="16" rx="3"/>
+                  <circle cx="7" cy="10" r="1.5" fill="currentColor" stroke="none"/>
+                  <circle cx="13" cy="10" r="1.5" fill="currentColor" stroke="none"/>
+                </svg>
+                Telehealth Available
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- stats -->
+      <div class="four-stats">
+        <div class="sbox">
+          <div class="sicon sblue">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <strong>2,400+</strong>
+          <span>Patients Helped</span>
+        </div>
+        <div class="sbox">
+          <div class="sicon syellow">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <strong>4.9<small>/5</small></strong>
+          <span>Patient Rating</span>
+        </div>
+        <div class="sbox">
+          <div class="sicon sgreen">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <strong>15 <small>Yrs</small></strong>
+          <span>Clinical Practice</span>
+        </div>
+        <div class="sbox">
+          <div class="sicon spurple">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <strong>Verified</strong>
+          <span>Jevacare Elite</span>
+        </div>
+      </div>
+
+      <!-- bio + achievements side by side -->
+      <div class="mid-section">
+        <div class="journey-side">
+          <h2><span class="bar"></span> Professional Journey</h2>
+          <p>Dr. Arisov completed his medical residency at Johns Hopkins, followed by a fellowship in Experimental Neurology. His mission at Jevacare is to provide patients with personalized care plans that integrate the latest neurological research with compassionate, human-centered practice.</p>
+          <div class="role-chip">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="6" width="16" height="12" rx="2"/>
+              <path d="M8 6V4a2 2 0 014 0v2"/>
+            </svg>
+            <div>
+              <div class="role-name">Director of Neurology</div>
+              <div class="role-place">Northwest General Hospital &bull; 2018 – Present</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="achiev-side">
+          <h2><span class="bar"></span> Key Achievements</h2>
+          <div class="ach-list">
+            <div class="ach">
+              <div class="ach-ic yellow-ic">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="ach-title">Top Specialist 2023</p>
+                <p class="ach-sub">Recognized by National Health Council for clinical excellence.</p>
+              </div>
+            </div>
+            <div class="ach">
+              <div class="ach-ic blue-ic">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="ach-title">45+ Publications</p>
+                <p class="ach-sub">Lead researcher in neurological rehabilitation studies.</p>
+              </div>
+            </div>
+            <div class="ach">
+              <div class="ach-ic green-ic">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="8" r="6"/>
+                  <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+                </svg>
+              </div>
+              <div>
+                <p class="ach-title">Innovator Award</p>
+                <p class="ach-sub">Developed proprietary patient recovery tracking protocols.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- certifications -->
+      <div class="certs-block">
+        <div class="certs-head">
+          <h2><span class="bar yellow-bar"></span> Jevacare Certifications</h2>
+          <small>
+            <svg width="11" height="11" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            PLATFORM VERIFIED
+          </small>
+        </div>
+        <div class="cert-row">
+          <div class="cert gold-cert" onclick="showToast('Senior Clinical Excellence – Gold')">
+            <div class="medal-wrap">
+              <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" fill="#fef3c7"/>
+                <circle cx="20" cy="20" r="13" fill="#fde68a"/>
+                <path d="M20 10l2.47 7.6H30l-6.18 4.49 2.36 7.27L20 24.9l-6.18 4.46 2.36-7.27L9.99 17.6H17.5L20 10z" fill="#f59e0b"/>
+              </svg>
+              <span class="tier-tag gold-t">gold</span>
+            </div>
+            <p class="cert-title">Senior Clinical Excellence</p>
+            <p class="cert-from">Jevacare Academy &bull; 2024</p>
+            <svg class="tick" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="#f59e0b" stroke-width="2">
+              <circle cx="10" cy="10" r="8"/><path d="M6.5 10l2.5 2.5 4.5-4.5"/>
+            </svg>
+          </div>
+
+          <div class="cert gold-cert" onclick="showToast('Telehealth Specialist – Gold')">
+            <div class="medal-wrap">
+              <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" fill="#fef3c7"/>
+                <circle cx="20" cy="20" r="13" fill="#fde68a"/>
+                <path d="M20 10l2.47 7.6H30l-6.18 4.49 2.36 7.27L20 24.9l-6.18 4.46 2.36-7.27L9.99 17.6H17.5L20 10z" fill="#f59e0b"/>
+              </svg>
+              <span class="tier-tag gold-t">gold</span>
+            </div>
+            <p class="cert-title">Telehealth Specialist</p>
+            <p class="cert-from">International Medical Board &bull; 2023</p>
+            <svg class="tick" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="#f59e0b" stroke-width="2">
+              <circle cx="10" cy="10" r="8"/><path d="M6.5 10l2.5 2.5 4.5-4.5"/>
+            </svg>
+          </div>
+
+          <div class="cert silver-cert" onclick="showToast('Advanced Patient Care – Silver')">
+            <div class="medal-wrap">
+              <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" fill="#f1f5f9"/>
+                <circle cx="20" cy="20" r="13" fill="#e2e8f0"/>
+                <path d="M20 10l2.47 7.6H30l-6.18 4.49 2.36 7.27L20 24.9l-6.18 4.46 2.36-7.27L9.99 17.6H17.5L20 10z" fill="#94a3b8"/>
+              </svg>
+              <span class="tier-tag silver-t">silver</span>
+            </div>
+            <p class="cert-title">Advanced Patient Care</p>
+            <p class="cert-from">Jevacare Academy &bull; 2022</p>
+            <svg class="tick" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="#94a3b8" stroke-width="2">
+              <circle cx="10" cy="10" r="8"/><path d="M6.5 10l2.5 2.5 4.5-4.5"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- reviews -->
+      <div class="reviews-block">
+        <h2><span class="bar"></span> Patient Voices</h2>
+        <div class="reviews-row">
+
+          <div class="rev-card">
+            <div class="star-row">
+              <svg viewBox="0 0 20 20" fill="#f59e0b"><path d="M10 1l2.47 7.6H20l-6.18 4.49 2.36 7.27L10 16.2l-6.18 4.16 2.36-7.27L0 8.6h7.53L10 1z"/></svg>
+              <svg viewBox="0 0 20 20" fill="#f59e0b"><path d="M10 1l2.47 7.6H20l-6.18 4.49 2.36 7.27L10 16.2l-6.18 4.16 2.36-7.27L0 8.6h7.53L10 1z"/></svg>
+              <svg viewBox="0 0 20 20" fill="#f59e0b"><path d="M10 1l2.47 7.6H20l-6.18 4.49 2.36 7.27L10 16.2l-6.18 4.16 2.36-7.27L0 8.6h7.53L10 1z"/></svg>
+              <svg viewBox="0 0 20 20" fill="#f59e0b"><path d="M10 1l2.47 7.6H20l-6.18 4.49 2.36 7.27L10 16.2l-6.18 4.16 2.36-7.27L0 8.6h7.53L10 1z"/></svg>
+              <svg viewBox="0 0 20 20" fill="#f59e0b"><path d="M10 1l2.47 7.6H20l-6.18 4.49 2.36 7.27L10 16.2l-6.18 4.16 2.36-7.27L0 8.6h7.53L10 1z"/></svg>
+            </div>
+            <p>"Dr. Arisov's approach to my treatment was life-changing. He listened to my concerns and explained everything clearly."</p>
+            <div class="rev-footer">
+              <div class="rev-avatar" style="background:#22c55e">SA</div>
+              <div class="rev-meta">
+                <strong>Sarah Ama</strong>
+                <span>2 MONTHS AGO</span>
+              </div>
+              <button class="thumb-btn" onclick="toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M14 10h4l-4 8H4l-4-8h4V3a1 1 0 011-1h4a1 1 0 011 1v7z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="rev-card">
+            <div class="star-row">
+              <svg viewBox="0 0 20 20" fill="#f59e0b"><path d="M10 1l2.47 7.6H20l-6.18 4.49 2.36 7.27L10 16.2l-6.18 4.16 2.36-7.27L0 8.6h7.53L10 1z"/></svg>
+              <svg viewBox="0 0 20 20" fill="#f59e0b"><path d="M10 1l2.47 7.6H20l-6.18 4.49 2.36 7.27L10 16.2l-6.18 4.16 2.36-7.27L0 8.6h7.53L10 1z"/></svg>
+              <svg viewBox="0 0 20 20" fill="#f59e0b"><path d="M10 1l2.47 7.6H20l-6.18 4.49 2.36 7.27L10 16.2l-6.18 4.16 2.36-7.27L0 8.6h7.53L10 1z"/></svg>
+              <svg viewBox="0 0 20 20" fill="#f59e0b"><path d="M10 1l2.47 7.6H20l-6.18 4.49 2.36 7.27L10 16.2l-6.18 4.16 2.36-7.27L0 8.6h7.53L10 1z"/></svg>
+              <svg viewBox="0 0 20 20" fill="#f59e0b"><path d="M10 1l2.47 7.6H20l-6.18 4.49 2.36 7.27L10 16.2l-6.18 4.16 2.36-7.27L0 8.6h7.53L10 1z"/></svg>
+            </div>
+            <p>"Professional, punctual, and incredibly knowledgeable. The best neurologist I've visited in the city."</p>
+            <div class="rev-footer">
+              <div class="rev-avatar" style="background:#3b82f6">MC</div>
+              <div class="rev-meta">
+                <strong>Michael</strong>
+                <span>3 WEEKS AGO</span>
+              </div>
+              <button class="thumb-btn" onclick="toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M14 10h4l-4 8H4l-4-8h4V3a1 1 0 011-1h4a1 1 0 011 1v7z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- credentials accordion -->
+      <div class="creds-block">
+        <h2><span class="bar red-bar"></span> Full Credentials</h2>
+        <div class="acc-wrap">
+
+          <div class="acc-item" id="a1">
+            <button onclick="openAcc('a1')">
+              <span>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M12 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                  <path d="M12 2v6h6M8 13h4M8 10h6"/>
+                </svg>
+                Education &amp; Training
+              </span>
+              <svg class="chevron" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 8l5 5 5-5"/>
+              </svg>
+            </button>
+            <div class="acc-body">
+              <p><strong>MD, Johns Hopkins University</strong> — School of Medicine, 2005</p>
+              <p><strong>Residency in Neurology</strong> — Johns Hopkins Hospital, 2005–2009</p>
+              <p><strong>Fellowship in Experimental Neurology</strong> — Stanford Medical Center, 2009–2011</p>
+            </div>
+          </div>
+
+          <div class="acc-item" id="a2">
+            <button onclick="openAcc('a2')">
+              <span>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Professional Memberships
+              </span>
+              <svg class="chevron" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 8l5 5 5-5"/>
+              </svg>
+            </button>
+            <div class="acc-body">
+              <p><strong>American Academy of Neurology</strong> — Fellow since 2010</p>
+              <p><strong>World Federation of Neurology</strong> — Active Member</p>
+              <p><strong>Society for Neuroscience</strong> — Active Member</p>
+            </div>
+          </div>
+
+          <div class="acc-item" id="a3">
+            <button onclick="openAcc('a3')">
+              <span>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="10" cy="8" r="6"/>
+                  <path d="M12.477 12.89L14 22l-4-3-4 3 1.523-9.11"/>
+                </svg>
+                Awards &amp; Distinctions
+              </span>
+              <svg class="chevron" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 8l5 5 5-5"/>
+              </svg>
+            </button>
+            <div class="acc-body">
+              <p><strong>Top Specialist Award 2023</strong> — National Health Council</p>
+              <p><strong>Innovator Award 2021</strong> — Jevacare Excellence Program</p>
+              <p><strong>Best Neurologist Pacific Northwest</strong> — Seattle Medical Journal 2020</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- end main content -->
+
+    <!-- right sidebar -->
+    <aside class="sidebar">
+
+      <div class="booking-box">
+        <div class="book-top">
+          <span class="appt-label">
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="14" height="13" rx="2"/>
+              <path d="M7 2v4M13 2v4M3 9h14"/>
+            </svg>
+            APPOINTMENT
+          </span>
+          <span class="avail-badge">NEXT AVAILABLE TODAY</span>
+        </div>
+
+        <h3>Schedule Consultation</h3>
+
+        <div class="date-options">
+          <div class="d-opt selected" onclick="pickDate(this,'Mon, May 20')">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="4" width="14" height="13" rx="2"/>
+              <path d="M7 2v4M13 2v4M3 9h14"/>
+            </svg>
+            <p>Mon, May 20</p>
+            <small>Tomorrow</small>
+          </div>
+          <div class="d-opt" onclick="pickDate(this,'Tue, May 21')">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="4" width="14" height="13" rx="2"/>
+              <path d="M7 2v4M13 2v4M3 9h14"/>
+            </svg>
+            <p>Tue, May 21</p>
+            <small>2 slots left</small>
+          </div>
+        </div>
+
+        <div class="slot-info">
+          <div class="slot-row">
+            <span>
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="10" cy="10" r="8"/><path d="M10 6v4l2.5 2.5"/>
+              </svg>
+              Earliest Slot:
+            </span>
+            <strong class="slot-time">09:30 AM</strong>
+          </div>
+          <div class="slot-row">
+            <span>
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+              Service Type:
+            </span>
+            <strong>Initial Review</strong>
+          </div>
+        </div>
+
+        <button class="book-now" id="bookNow" onclick="window.location.href='appointment.html'">
+          Book Appointment
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M4 10h12M11 5l5 5-5 5"/>
+          </svg>
+        </button>
+
+        <ul class="perks">
+          <li>
+            <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#16a34a" stroke-width="2">
+              <circle cx="10" cy="10" r="8"/><path d="M6.5 10l2.5 2.5 4.5-4.5"/>
+            </svg>
+            Direct insurance billing available
+          </li>
+          <li>
+            <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#16a34a" stroke-width="2">
+              <circle cx="10" cy="10" r="8"/><path d="M6.5 10l2.5 2.5 4.5-4.5"/>
+            </svg>
+            No pre-payment required
+          </li>
+          <li>
+            <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#16a34a" stroke-width="2">
+              <circle cx="10" cy="10" r="8"/><path d="M6.5 10l2.5 2.5 4.5-4.5"/>
+            </svg>
+            24h Cancellation policy
+          </li>
+        </ul>
+      </div>
+
+      <!-- location -->
+      <div class="location-box">
+        <h4>Location &amp; Access</h4>
+        <div class="loc-wrap">
+          <div class="loc-thumb">
+            <svg viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <rect width="100" height="70" rx="6" fill="#bfdbfe"/>
+              <rect x="15" y="18" width="52" height="52" fill="#2563eb"/>
+              <rect x="17" y="20" width="48" height="50" fill="#3b82f6"/>
+              <rect x="22" y="26" width="10" height="8" rx="1" fill="#93c5fd"/>
+              <rect x="36" y="26" width="10" height="8" rx="1" fill="#93c5fd"/>
+              <rect x="50" y="26" width="10" height="8" rx="1" fill="#93c5fd"/>
+              <rect x="22" y="38" width="10" height="8" rx="1" fill="white"/>
+              <rect x="36" y="38" width="10" height="8" rx="1" fill="#93c5fd"/>
+              <rect x="50" y="38" width="10" height="8" rx="1" fill="#93c5fd"/>
+              <rect x="34" y="54" width="12" height="16" rx="2" fill="#1e40af"/>
+              <rect x="0" y="62" width="100" height="8" fill="#94a3b8"/>
+              <rect x="70" y="38" width="4" height="24" rx="1" fill="#92400e"/>
+              <ellipse cx="72" cy="34" rx="10" ry="11" fill="#16a34a"/>
+              <ellipse cx="72" cy="32" rx="8" ry="9" fill="#22c55e"/>
+            </svg>
+          </div>
+          <div class="loc-text">
+            <strong>Seattle Medical Center</strong>
+            <p>1200 Broadway, Suite 400<br>Seattle, WA 98122</p>
+            <a href="Map.html" onclick="showToast('Opening maps...')">
+              <svg width="11" height="11" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10h12M11 5l5 5-5 5"/>
+              </svg>
+              Get Directions
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <a href="#" class="brand">
+        <img src="images/logo.jpeg" alt="JevaCare Logo" class="logo-img">
+          <span class="brand-name">JevaCare</span>
+      </a>
+      <p>Revolutionizing healthcare access through technology and human-centered design.</p>
+    </div>
+    <div class="foot-links">
+      <h5>Services</h5>
+      <a href="#">Find Specialists</a>
+      <a href="#">Pharmacy Delivery</a>
+      <a href="#">Telehealth</a>
+    </div>
+    <div class="foot-links">
+      <h5>Support</h5>
+      <a href="#">Help Center</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Jevacare. All rights reserved.</span>
+    <div>
+      <a href="#">Terms of Service</a>
+      <a href="#">Security</a>
+    </div>
+  </div>
+</footer>
+
+<button class="fab" onclick="window.location.href='chat.html'">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="1.8">
+    <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H6l-4 3V5z"/>
+  </svg>
+</button>
+
+<div id="toast" class="toast"></div>
+
+<script src="javascript/last.js"></script>
+</body>
+</html>

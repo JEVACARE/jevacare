@@ -1,0 +1,89 @@
+/* Mobile enhancements + small layout fixes for chat.html.
+   This file is loaded AFTER the inline <style> in chat.html. */
+
+body {
+  height: 100dvh;
+}
+
+.chat-area {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9ff 100%);
+}
+
+.chat-header {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+}
+
+/* Fix: avoid hard-coded spacing that breaks on small screens */
+.input-footer {
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.md-hint {
+  padding-left: 0;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.send-btn {
+  flex-shrink: 0;
+}
+
+@media (max-width: 520px) {
+  /* Give chat more vertical space */
+  .header { height: 56px; padding: 0 14px; }
+  .mobile-nav { top: 56px; }
+  .sidebar { top: 56px; }
+
+  /* Chat header: smaller like a mobile app */
+  .chat-header { padding: 10px 12px; }
+  .chat-user-left { gap: 10px; }
+  .ch-avatar { width: 36px; height: 36px; }
+  .ch-dot { width: 10px; height: 10px; }
+  .ch-name { font-size: 0.92rem; flex-wrap: nowrap; }
+  .verified-badge { display: none; }
+  .ch-status { font-size: 0.74rem; margin-top: 1px; }
+  .chat-header-right { gap: 8px; }
+
+  .escalate-btn { padding: 8px 10px; border-radius: 14px; }
+  .escalate-btn svg { width: 16px; height: 16px; }
+  .escalate-text { display: none; }
+
+  .more-btn { padding: 6px; }
+
+  /* Message area spacing */
+  .chat-body { padding: 14px 12px 10px; }
+  .enc-banner { font-size: 0.68rem; padding: 8px 12px; margin-bottom: 10px; letter-spacing: 0.4px; }
+
+  /* Quick actions: single-row, scrollable chips (saves height) */
+  .quick-actions {
+    padding: 6px 12px 4px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .quick-actions::-webkit-scrollbar { display: none; }
+  .qa-btn { flex: 0 0 auto; padding: 8px 12px; font-size: 0.78rem; }
+
+  /* Input: compact + hide hint */
+  .input-wrap { padding: 6px 12px 10px; }
+  .input-box textarea { padding: 12px 14px 4px; min-height: 42px; }
+  .input-footer { padding: 6px 10px 10px; }
+  .md-hint { display: none; }
+
+  .send-btn { padding: 10px 12px; border-radius: 14px; }
+  .send-text { display: none; }
+
+  /* Disclaimer: keep it, but don't steal the screen */
+  .disclaimer {
+    font-size: 0.68rem;
+    line-height: 1.35;
+    padding: 4px 12px calc(10px + env(safe-area-inset-bottom));
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+

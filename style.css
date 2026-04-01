@@ -1,0 +1,278 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    }
+    
+    body{
+    font-family:'Inter',sans-serif;
+    background:#f5f5f5;
+    color:#222;
+    }
+    
+    
+    /* MAIN LAYOUT */
+    
+    .container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:80vh;
+    padding:40px;
+    gap:80px;
+    }
+    
+    
+    /* LEFT SIDE */
+    
+    .left{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    }
+    
+    .illustration{
+    max-width:450px;
+    width:100%;
+    }
+    
+    
+    /* RIGHT SIDE */
+    
+    .right{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    }
+    
+    .login-box{
+    width:380px;
+    }
+    
+    
+    /* TITLE */
+    
+    .login-box h1{
+    font-size:30px;
+    font-weight:700;
+    margin-bottom:8px;
+    }
+    
+    .subtitle{
+    font-size:14px;
+    color:#666;
+    margin-bottom:25px;
+    line-height:1.5;
+    }
+    
+    
+    /* TABS */
+    
+    .tabs{
+    display:flex;
+    background:#eee;
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:20px;
+    }
+    
+    .tabs button{
+    flex:1;
+    padding:11px;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    font-weight:500;
+    font-size:14px;
+    }
+    
+    .tabs .active{
+    background:white;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    
+    /* SOCIAL LOGIN */
+    
+    .social-login{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+    }
+    
+    .social-btn{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:11px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    background:white;
+    cursor:pointer;
+    font-weight:500;
+    }
+    
+    .social-btn img{
+    width:18px;
+    height:18px;
+    }
+    
+    
+    /* DIVIDER */
+    
+    .divider{
+    text-align:center;
+    margin:30px 0;
+    font-size:12px;
+    color:#888;
+    position:relative;
+    }
+    
+    .divider::before,
+    .divider::after{
+    content:'';
+    position:absolute;
+    top:50%;
+    width:20%;
+    height:1px;
+    background:#ddd;
+    }
+    
+    .divider::before{
+    left:0;
+    }
+    
+    .divider::after{
+    right:0;
+    }
+    
+    
+    /* FORM */
+    
+    .login-form label{
+    font-size:13px;
+    font-weight:500;
+    display:block;
+    margin-bottom:6px;
+    }
+    
+    .login-form input{
+    width:100%;
+    padding:12px;
+    margin-bottom:16px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:14px;
+    }
+    
+    
+    .password-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:6px;
+    }
+    
+    .password-row a{
+    text-decoration:none;
+    font-size:12px;
+    color:#2d5bff;
+    }
+    
+    
+    /* SIGN IN BUTTON */
+    
+    .signin-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,#1a2bff,#4a48ff);
+    color:white;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    margin-top:5px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.15);
+    transition:0.2s;
+    }
+    
+    .signin-btn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.18);
+    }
+    
+    
+    /* SIGNUP TEXT */
+    
+    .signup-text{
+    margin-top:18px;
+    font-size:13px;
+    text-align:center;
+    color:#555;
+    }
+    
+    .signup-text a{
+    color:#2d5bff;
+    text-decoration:none;
+    font-weight:500;
+    }
+    
+    
+    /* BRAND TEXT */
+    
+    .brand{
+    text-align:center;
+    margin-top:40px;
+    }
+    
+    .brand h2{
+    font-size:150px;
+    font-weight:900;
+    background:linear-gradient(90deg,#1a2bff,#4a48ff);
+    -webkit-background-clip:text;
+    color:transparent;
+    font-style: italic;
+    }
+    
+    .brand p{
+    font-size:40px;
+    font-weight:700;
+    color:#2d5bff;
+    margin-top:-10px;
+    font-style: italic;
+    }
+    
+    
+    /* RESPONSIVE */
+    
+    @media(max-width:900px){
+    
+    .container{
+    flex-direction:column;
+    gap:40px;
+    }
+    
+    .login-box{
+    width:100%;
+    max-width:380px;
+    }
+    
+    .brand h2{
+    font-size:60px;
+    }
+    
+    .brand p{
+    font-size:28px;
+    }
+    
+    }
+    .tabs button.active{
+        background:white;
+        box-shadow:0 2px 5px rgba(0,0,0,0.1);
+        font-weight:600;
+        }

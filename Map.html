@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Jevacare – Track Delivery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css"/>
+  <link rel="stylesheet" href="Pcss/Map.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="images/logo.jpeg" alt="JevaCare Logo" class="logo-img">
+      <span class="brand-name">Jevacare</span>
+  </a>
+  <div class="nav-links">
+    <a href="appointment.html">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+        <rect x="3" y="4" width="14" height="13" rx="2"/><path d="M7 2v4M13 2v4M3 9h14"/>
+      </svg>
+      Appointments
+    </a>
+    <a href="Map.html" class="active">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 2.5"/>
+      </svg>
+      Track Delivery
+    </a>
+    <a href="index1.html">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M10 2a5 5 0 015 5c0 3.5-5 10-5 10S5 10.5 5 7a5 5 0 015-5z"/>
+        <circle cx="10" cy="7" r="1.5"/>
+      </svg>
+      My Health
+    </a>
+  </div>
+  <div class="nav-right">
+    <button class="bell-btn" onclick="showToast('No new notifications')">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#4B5563" stroke-width="1.8">
+        <path d="M10 2a6 6 0 016 6c0 3 1.5 4 1.5 4H2.5S4 11 4 8a6 6 0 016-6z"/>
+        <path d="M8.5 17a1.5 1.5 0 003 0"/>
+      </svg>
+      <span class="bell-dot"></span>
+    </button>
+    <div class="user-chip">
+      <div class="user-info">
+        <div class="user-name">Sarah Ama</div>
+        <div class="user-role">Premium Member</div>
+      </div>
+      <div class="avatar">SA</div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="deliverySidebar" aria-label="Delivery details">
+    <div class="sidebar-mobile-header">
+      <div class="sidebar-mobile-title">Delivery Details</div>
+      <button class="sidebar-close-btn" type="button" onclick="closeSidebar()">Close</button>
+    </div>
+    <div class="order-header">
+      <span class="order-badge">#JC-92841</span>
+      <span class="live-tag"><span class="live-dot"></span> LIVE TRACKING</span>
+    </div>
+
+    <div class="eta-block">
+      <div class="eta-label">Estimated Arrival</div>
+      <div class="eta-time">11:35 <span>AM</span></div>
+    </div>
+
+    <div class="courier-card">
+      <div class="courier-avatar">MT</div>
+      <div class="courier-info">
+        <div class="courier-name">Mark Thompson</div>
+        <div class="courier-verified">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0l1.6 2.9 3.2.5-2.3 2.2.5 3.2L8 7.2 4.9 8.8l.5-3.2L3.2 3.4l3.2-.5L8 0z"/>
+          </svg>
+          Verified Courier
+        </div>
+      </div>
+      <div class="courier-actions">
+        <button class="icon-btn" onclick="showToast('Calling Mark Thompson...')">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M2 3.5A1.5 1.5 0 013.5 2h1.38a1.5 1.5 0 011.42 1.02l.93 2.77a1.5 1.5 0 01-.34 1.57L5.5 8.7c1.05 2.03 2.77 3.75 4.8 4.8l1.34-1.41a1.5 1.5 0 011.57-.34l2.77.93A1.5 1.5 0 0117 14.12V15.5A1.5 1.5 0 0115.5 17C8.04 17 2 10.96 2 3.5z"/>
+          </svg>
+        </button>
+        <button class="icon-btn" onclick="showToast('Opening chat with Mark...')">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H6l-4 3V5z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title" style="margin-bottom:12px">Tracking History</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="tl-icon-wrap">
+            <div class="tl-icon done">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 10l5 5 9-9"/></svg>
+            </div>
+            <div class="tl-line done"></div>
+          </div>
+          <div class="tl-text"><div class="tl-label">Order Placed</div><div class="tl-time">09:30 AM</div></div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-icon-wrap">
+            <div class="tl-icon done">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 10l5 5 9-9"/></svg>
+            </div>
+            <div class="tl-line done"></div>
+          </div>
+          <div class="tl-text"><div class="tl-label">Pharmacy Processing</div><div class="tl-time">10:15 AM</div></div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-icon-wrap">
+            <div class="tl-icon active">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect x="2" y="7" width="16" height="10" rx="2"/><path d="M16 7V5a2 2 0 00-2-2H6a2 2 0 00-2 2v2"/><circle cx="10" cy="13" r="1.5" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-text"><div class="tl-label">Courier Picked Up</div><div class="tl-time">11:05 AM</div></div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-icon-wrap">
+            <div class="tl-icon">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 2a5 5 0 015 5c0 3.5-5 10-5 10S5 10.5 5 7a5 5 0 015-5z"/><circle cx="10" cy="7" r="1.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="tl-text"><div class="tl-label pending">Delivered</div><div class="tl-time">Estimated 11:35 AM</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-items-box">
+      <div class="order-items-header">ORDER ITEMS (2)</div>
+      <div class="order-item">
+        <div class="item-icon">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="4" y="3" width="12" height="14" rx="2"/><path d="M8 7h4M8 10h4M8 13h2"/>
+          </svg>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Amoxicillin 500mg</div>
+          <div class="item-qty">Qty: 1 Unit • 30 Capsules</div>
+        </div>
+        <span class="item-badge">Prescription</span>
+      </div>
+      <div class="order-item">
+        <div class="item-icon" style="background:var(--gray-100);color:var(--gray-600)">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="10" cy="10" r="7"/><path d="M10 6v4M10 13v1"/>
+          </svg>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Cooling Gel Pad</div>
+          <div class="item-qty">Qty: 2 Units • Retail Item</div>
+        </div>
+        <span class="item-badge retail">Retail</span>
+      </div>
+    </div>
+
+    <div class="action-btns">
+      <button class="btn" onclick="openReschedule()">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 4v5h5M16 16v-5h-5"/><path d="M4 9A8 8 0 0116 9M4 11a8 8 0 0012 0" stroke-linecap="round"/>
+        </svg>
+        Reschedule
+      </button>
+      <button class="btn" onclick="showToast('Redirecting delivery...')">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M10 3l7 7-7 7M3 10h14"/>
+        </svg>
+        Redirect
+      </button>
+    </div>
+
+    <div class="notice">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="10" cy="10" r="8"/><path d="M10 9v5M10 6v1"/>
+      </svg>
+      Someone aged 18+ must be present to sign for the prescription items in this order.
+    </div>
+  </aside>
+
+  <!-- MAP -->
+  <div class="map-area">
+    <div id="map"></div>
+    <div class="map-controls">
+      <button class="map-ctrl-btn sidebar-toggle-btn" id="sidebarToggleBtn" type="button" onclick="toggleSidebar()" title="Delivery details" aria-controls="deliverySidebar" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 6h12M4 10h12M4 14h12"/>
+        </svg>
+      </button>
+      <button class="map-ctrl-btn" onclick="map.locate({setView:true})" title="My location">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="10" cy="10" r="3"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2"/>
+        </svg>
+      </button>
+      <button class="map-ctrl-btn" onclick="recenterMap()" title="Center on delivery">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M10 3l7 7-7 7-7-7 7-7z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="eta-pill">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 2.5"/>
+      </svg>
+      <span id="etaMinutes">few minute away</span>
+    </div>
+
+    <div class="nanipal-popup" id="nanipalPopup">
+      <div class="nanipal-header">
+        <div class="nanipal-header-left">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="white">
+            <circle cx="10" cy="10" r="8"/><path d="M7 9a3 3 0 016 0c0 2-3 4-3 4M10 16v1" stroke="white" stroke-width="1.6" fill="none"/>
+          </svg>
+          ASK NANIPAL
+        </div>
+        <button class="nanipal-close" onclick="closeNanipal()">✕</button>
+      </div>
+      <div class="nanipal-body">
+        <div class="nanipal-msg">"Mark is currently 2 blocks away. Would you like me to share your 'Doorbell Code' with him?"</div>
+        <div class="nanipal-actions">
+          <button class="nanipal-btn primary" onclick="nanipalAction('Code shared with Mark!')">Yes, share code</button>
+          <button class="nanipal-btn" onclick="nanipalAction('OK, we\'ll wait.')">No, wait</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-tabs" aria-label="Primary navigation">
+      <a href="appointment.html">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="4" width="14" height="13" rx="2"/><path d="M7 2v4M13 2v4M3 9h14"/>
+        </svg>
+        Appointments
+      </a>
+      <a href="Map.html" class="active" aria-current="page">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 2.5"/>
+        </svg>
+        Track Delivery
+      </a>
+      <a href="index1.html">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M10 2a5 5 0 015 5c0 3.5-5 10-5 10S5 10.5 5 7a5 5 0 015-5z"/>
+          <circle cx="10" cy="7" r="1.5"/>
+        </svg>
+        My Health
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()" aria-hidden="true"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="margin-bottom:8px;display:inline-flex">
+        <img src="images/logo.jpeg" alt="JevaCare Logo" class="logo-img">
+          <span class="brand-name">Jevacare</span>
+      </a>
+      <p>Revolutionizing healthcare access through technology and human-centered design.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="jevacare-doctors.html">Find Specialists</a>
+      <a href="jevacare-pharmacy.html">Pharmacy Delivery</a>
+      <a href="#">Telehealth</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Jevacare. All rights reserved.</span>
+    <div style="display:flex;gap:16px">
+      <a href="#">Terms of Service</a>
+      <a href="#">Security</a>
+    </div>
+  </div>
+</footer>
+
+<button class="chat-fab" onclick="window.location.href='chat.html'">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="1.8">
+    <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H6l-4 3V5z"/>
+  </svg>
+</button>
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Reschedule Modal -->
+<div id="rescheduleModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:16px;padding:24px;width:340px;box-shadow:0 20px 60px rgba(0,0,0,0.2)">
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px">Reschedule Delivery</h3>
+    <label style="font-size:0.8rem;color:#6B7280;font-weight:500">Select new date</label>
+    <input type="date" id="rescheduleDate" style="width:100%;margin-top:6px;margin-bottom:14px;padding:9px 12px;border:1px solid #E5E7EB;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.875rem;outline:none">
+    <label style="font-size:0.8rem;color:#6B7280;font-weight:500">Select time slot</label>
+    <select id="rescheduleTime" style="width:100%;margin-top:6px;padding:9px 12px;border:1px solid #E5E7EB;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.875rem;outline:none;background:white">
+      <option>9:00 AM – 11:00 AM</option>
+      <option>11:00 AM – 1:00 PM</option>
+      <option>1:00 PM – 3:00 PM</option>
+      <option>3:00 PM – 5:00 PM</option>
+    </select>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+      <button onclick="closeModal()" style="padding:9px;border:1px solid #E5E7EB;border-radius:8px;background:white;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.85rem">Cancel</button>
+      <button onclick="confirmReschedule()" style="padding:9px;border:none;border-radius:8px;background:#2563EB;color:white;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.85rem">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
+<script src="javascript/Map.js"></script>
+<script>
+  (function () {
+    const sidebar = document.getElementById('deliverySidebar');
+    const toggleBtn = document.getElementById('sidebarToggleBtn');
+    const backdrop = document.getElementById('sidebarBackdrop');
+    const MOBILE_MAX_WIDTH = 768;
+
+    function setExpanded(isExpanded) {
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', String(isExpanded));
+    }
+
+    function isMobile() {
+      return window.matchMedia && window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH}px)`).matches;
+    }
+
+    window.openSidebar = function () {
+      if (!isMobile()) return;
+      document.body.classList.add('sidebar-open');
+      setExpanded(true);
+      if (sidebar) sidebar.scrollTop = 0;
+    };
+
+    window.closeSidebar = function () {
+      document.body.classList.remove('sidebar-open');
+      setExpanded(false);
+    };
+
+    window.toggleSidebar = function () {
+      if (!isMobile()) return;
+      const isOpen = document.body.classList.contains('sidebar-open');
+      if (isOpen) window.closeSidebar();
+      else window.openSidebar();
+    };
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') window.closeSidebar();
+    });
+
+    if (backdrop) {
+      backdrop.addEventListener('click', window.closeSidebar);
+    }
+
+    if (window.matchMedia) {
+      const mq = window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH}px)`);
+      const handleChange = () => {
+        if (!mq.matches) window.closeSidebar();
+      };
+      if (mq.addEventListener) mq.addEventListener('change', handleChange);
+      else if (mq.addListener) mq.addListener(handleChange);
+    }
+  })();
+</script>
+</body>
+</html>

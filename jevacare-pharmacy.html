@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JEVACare – Pharmacy Marketplace</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="jevacare-pharmacy.css"/>
+</head>
+<body>
+
+
+<nav>
+  <div class="nav-logo">
+    <img src="jevacare.jpeg" alt="Jevacare Logo" class="logo-img"/>  
+    <span style="color:rgb(32, 96, 199);">Jevacare</span>
+  </div>
+
+  <div class="nav-search">
+    <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="#9CA3AF" stroke-width="1.8"/><path d="M13.5 13.5L17 17" stroke="#9CA3AF" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <input placeholder="Search doctors, meds..." />
+  </div>
+
+  <div class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="jevacare-doctors.html">Doctors</a>
+    <a href="jevacare-pharmacy.html" class="active">Pharmacies</a>
+    <a href="appointment.html">Book</a>
+    <a href="chat.html">Chat</a>
+</div>
+
+
+
+  <div class="nav-actions">
+    <button class="nav-icon-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="nav-avatar">S</div>
+  </div>
+</nav>
+
+
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-badge">
+        
+        Health Essentials
+      </div>
+      <h1>Pharmacy Marketplace</h1>
+      <p>Find reliable local pharmacies and get your medications delivered in under 30 minutes.</p>
+    </div>
+    <div class="delivery-pill">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#1B4EF4"/></svg>
+      Delivering to: Ayeduase, Kumasi
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <div class="search-input-wrap">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="#9CA3AF" stroke-width="1.8"/><path d="M13.5 13.5L17 17" stroke="#9CA3AF" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input placeholder="Search medication, symptoms, or pharmacy names..." />
+    </div>
+    <button class="btn-filter">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M7 12h10M11 18h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Filter Results
+    </button>
+  </div>
+</div>
+
+
+<main>
+
+  
+  <div class="section-header">
+    <div>
+      <div class="section-title">Nearby Pharmacies</div>
+      <div class="section-subtitle">Certified partners available for instant delivery</div>
+    </div>
+    <div class="carousel-btns">
+      <button class="carousel-btn">&#8592;</button>
+      <button class="carousel-btn">&#8594;</button>
+    </div>
+  </div>
+
+  <div class="pharmacies-row">
+    
+    <div class="pharmacy-card">
+      <div class="pharm-logo-placeholder"><img src="placeholder/city.png" alt="City Care Pharmacy" /></div>
+      <div class="pharm-info">
+        <div class="pharm-name">City Care Pharmacy <span class="pharm-badge">Partner</span></div>
+        <div class="pharm-meta">
+          <span><img src="SVG_s/star1.svg" alt="star" class="icon"> 4.6</span>
+          <span><img src="SVG_s/location.svg" alt="location" class="icon"> 1.5 km</span>
+          <span class="time-pill"><img src="SVG_s/clock.svg" alt="clock" class="icon"> 15–20 min</span>
+        </div>
+      </div>
+      <span class="pharm-arrow">›</span>
+    </div>
+    <div class="pharmacy-card">
+      <div class="pharm-logo-placeholder"><img src="placeholder/wellness.jpg" alt="Wellness Point" /></div>
+      <div class="pharm-info">
+        <div class="pharm-name">Wellness Point</div>
+        <div class="pharm-meta">
+          <span><img src="SVG_s/star1.svg" alt="star" class="icon"> 4.8</span>
+          <span><img src="SVG_s/location.svg" alt="location" class="icon"> 2.1 km</span>
+          <span class="time-pill"><img src="SVG_s/clock.svg" alt="clock" class="icon"> 25–30 min</span>
+        </div>
+      </div>
+      <span class="pharm-arrow">›</span>
+    </div>
+    <!-- Card 3 -->
+    <div class="pharmacy-card">
+      <div class="pharm-logo-placeholder"><img src="placeholder/medilife.jpg" alt="MediLife Center" /></div>
+      <div class="pharm-info">
+        <div class="pharm-name">MediLife Center</div>
+        <div class="pharm-meta">
+          <span><img src="SVG_s/star1.svg" alt="star" class="icon"> 4.8</span>
+          <span><img src="SVG_s/location.svg" alt="location" class="icon"> 2.1 km</span>
+          <span class="time-pill"><img src="SVG_s/clock.svg" alt="clock" class="icon"> 20–25 min</span>
+        </div>
+      </div>
+      <span class="pharm-arrow">›</span>
+    </div>
+    <!-- Card 4 -->
+    <div class="pharmacy-card">
+      <div class="pharm-logo-placeholder"><img src="placeholder/healthplus.jpg" alt="HealthPlus Pharmacy" /></div>
+      <div class="pharm-info">
+        <div class="pharm-name">HealthPlus Pharmacy</div>
+        <div class="pharm-meta">
+          <span><img src="SVG_s/star1.svg" alt="star" class="icon"> 4.8</span>
+          <span><img src="SVG_s/location.svg" alt="location" class="icon"> 2.1 km</span>
+          <span class="time-pill"><img src="SVG_s/clock.svg" alt="clock" class="icon"> 20–25 min</span>
+        </div>
+      </div>
+      <span class="pharm-arrow">›</span>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="cat-row" id="catRow">
+    <button class="cat-btn active" data-cat="All" onclick="filterCat(this, 'All')">All</button>
+    <button class="cat-btn" data-cat="Vitamins" onclick="filterCat(this, 'Vitamins')">Vitamins</button>
+    <button class="cat-btn" data-cat="Pain Relief" onclick="filterCat(this, 'Pain Relief')">Pain Relief</button>
+    <button class="cat-btn" data-cat="Cold & Flu" onclick="filterCat(this, 'Cold & Flu')">Cold &amp; Flu</button>
+    <button class="cat-btn" data-cat="First Aid" onclick="filterCat(this, 'First Aid')">First Aid</button>
+    <button class="cat-btn" data-cat="Allergy" onclick="filterCat(this, 'Allergy')">Allergy</button>
+    <button class="cat-btn" data-cat="Digestive" onclick="filterCat(this, 'Digestive')">Digestive</button>
+  </div>
+
+  <!-- Products -->
+  <div class="products-grid" id="productsGrid">
+
+    <!-- 1 Paracetamol -->
+    <div class="product-card" data-cat="Pain Relief">
+      <div class="product-img" style="background:#FFF5F5;">
+        <img src="images 2/WhatsApp Image 2026-03-31 at 22.30.02 (3).jpeg" alt="Paracetamol" onerror="this.parentElement.innerHTML='💊'"/>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">GSK</div>
+        <div class="product-name">Paracetamol 500mg</div>
+        <div class="product-cat">Pain Relief</div>
+        <div class="product-footer">
+          <div class="product-price">₵12.50</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 Vitamin C -->
+    <div class="product-card" data-cat="Vitamins">
+      <div class="product-img" style="background:#FFFBEB;">
+        <img src="images 2/x.jpeg" alt="Vitamin C" onerror="this.parentElement.innerHTML='🍊'"/>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">REDOXON</div>
+        <div class="product-name">Vitamin C + Zinc</div>
+        <div class="product-cat">Vitamins</div>
+        <div class="product-footer">
+          <div class="product-price">₵24.99</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 Cough Syrup -->
+    <div class="product-card" data-cat="Cold & Flu">
+      <div class="low-stock-badge">Low Stock</div>
+      <div class="product-img" style="background:#F0FFF4;">
+        <img src="images 2/WhatsApp Image 2026-03-31 at 22.30.03.jpeg" alt="Cough Syrup" onerror="this.parentElement.innerHTML='🧴'"/>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">BENYLIN</div>
+        <div class="product-name">Cough Syrup</div>
+        <div class="product-cat">Cold &amp; Flu</div>
+        <div class="product-footer">
+          <div class="product-price">₵18.25</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Omega 3 -->
+    <div class="product-card" data-cat="Vitamins">
+      <div class="product-img" style="background:#FEFCE8;">
+        <img src="images 2/v.jpeg" alt="Omega 3" onerror="this.parentElement.innerHTML='🐟'"/>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">NATURE'S OWN</div>
+        <div class="product-name">Omega 3 Fish Oil</div>
+        <div class="product-cat">Vitamins</div>
+        <div class="product-footer">
+          <div class="product-price">₵32.00</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Antiseptic -->
+    <div class="product-card" data-cat="First Aid">
+      <div class="product-img" style="background:#EFF6FF;">
+        <img src="images 2/anti cream.jpeg" alt="Antiseptic" onerror="this.parentElement.innerHTML='🩹'"/>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">SAVLON</div>
+        <div class="product-name">Antiseptic Cream</div>
+        <div class="product-cat">First Aid</div>
+        <div class="product-footer">
+          <div class="product-price">₵8.45</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 Ibuprofen -->
+    <div class="product-card" data-cat="Pain Relief">
+      <div class="product-img" style="background:#F5F3FF;">
+        <img src="images 2/ibuprofen.jpeg" alt="Ibuprofen" onerror="this.parentElement.innerHTML='💊'"/>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">ADVIL</div>
+        <div class="product-name">Ibuprofen 200mg</div>
+        <div class="product-cat">Pain Relief</div>
+        <div class="product-footer">
+          <div class="product-price">₵15.99</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 Allergy -->
+    <div class="product-card" data-cat="Allergy">
+      <div class="low-stock-badge">Low Stock</div>
+      <div class="product-img" style="background:#FFF1F2;">
+        <img src="images 2/allergy relief.jpeg" alt="Allergy Relief" onerror="this.parentElement.innerHTML='💉'"/>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">ZYRTEC</div>
+        <div class="product-name">Allergy Relief</div>
+        <div class="product-cat">Allergy</div>
+        <div class="product-footer">
+          <div class="product-price">₵21.50</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 Digestive -->
+    <div class="product-card" data-cat="Digestive">
+      <div class="product-img" style="background:#F0FDF4;">
+        <img src="images 2/digestive.jpeg" alt="Digestive Enzymes" onerror="this.parentElement.innerHTML='🌿'"/>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">ZENWISE</div>
+        <div class="product-name">Digestive Enzymes</div>
+        <div class="product-cat">Digestive</div>
+        <div class="product-footer">
+          <div class="product-price">₵28.75</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Load More -->
+  <div class="load-more-wrap">
+    <button class="btn-load-more">Load More Products</button>
+  </div>
+
+  <!-- Prescription Banner -->
+  <div class="prescription-banner">
+    <div class="prescription-banner-text">
+      <h2>Prescription Delivery</h2>
+      <p>Need recurring medications? Upload your prescription and let Jevacare handle the scheduling for you.</p>
+    </div>
+    <div class="banner-right">
+      <button class="btn-upload">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Upload Prescription
+      </button>
+      <div class="refill-card">
+        <div class="refill-icon">🔄</div>
+        <div class="refill-text">
+          <div class="label">Next Refill</div>
+          <div class="sub">Scheduled for Oct 24, 2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+      
+        Jevacare
+      </div>
+      <p>Jevacare is your all-in-one health companion, bringing professional care to your fingertips.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="jevacare-doctors.html">Doctors</a>
+      <a href="jevacare-pharmacy.html">Pharmacies</a>
+      <a href="#">Pricing</a>
+      <a href="chat.html">Nanipal AI</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookie Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Jevacare. All rights reserved.</div>
+</footer>
+<script src="jevacare-pharmacy.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jevacare – Book Appointment</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1a6ef5;--blue-dark:#1558cc;--blue-light:#e8f0fe;--blue-mid:#dbeafe;
+  --green-btn:#5cdd47;--text:#111827;--text-sub:#6b7280;--text-muted:#9ca3af;
+  --border:#e5e7eb;--bg:#f8f9fb;--white:#ffffff;--radius:12px;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+/* HEADER */
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.header-left{display:flex;align-items:center;gap:28px;}
+.logo-box{display:flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none;}
+.brand{font-size:1.18rem;font-weight:700;color: rgb(32, 111, 215);letter-spacing:-0.3px;}
+.header-tabs{display:flex;align-items:center;gap:4px;}
+.h-tab{display:flex;align-items:center;gap:6px;font-size:.875rem;font-weight:500;color:var(--text-sub);padding:7px 14px;border-radius:8px;cursor:pointer;text-decoration:none;transition:all .15s;white-space:nowrap;border:none;background:none;font-family:'Inter',sans-serif;}
+.h-tab:hover{color:var(--blue);background:var(--blue-light);}
+.h-tab.active{background:var(--blue-light);color:var(--blue);font-weight:600;border-radius:20px;}
+.header-right{display:flex;align-items:center;gap:16px;}
+.bell-btn{background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;display:flex;align-items:center;transition:background .15s;}
+.bell-btn:hover{background:var(--bg);}
+.user-info{display:flex;align-items:center;gap:10px;}
+.user-text{text-align:right;}
+.user-name{font-size:.875rem;font-weight:600;color:var(--text);}
+.user-role{font-size:.75rem;color:var(--text-muted);}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#16a34a);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:.9rem;position:relative;cursor:pointer;border:2px solid #d1fae5;}
+.user-avatar-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;border:2px solid white;position:absolute;bottom:0;right:0;}
+.mob-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px;}
+.mob-menu-btn span{width:22px;height:2px;background:#374151;border-radius:2px;display:block;}
+.mobile-header-nav{display:none;background:var(--white);border-bottom:1px solid var(--border);padding:8px 16px 14px;flex-direction:column;gap:2px;position:sticky;top:60px;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,.06);}
+.mobile-header-nav.open{display:flex;}
+.mobile-header-nav a{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:.9rem;font-weight:500;color:#374151;padding:10px 12px;border-radius:8px;transition:background .15s;}
+.mobile-header-nav a:hover,.mobile-header-nav a.active{background:var(--blue-light);color:var(--blue);font-weight:600;}
+/* PAGE */
+.page-body{flex:1;padding:0 32px 48px;max-width:1100px;margin:0 auto;width:100%;}
+/* STEPPER */
+.stepper-wrap{padding:32px 0 28px;display:flex;justify-content:center;}
+.stepper{display:flex;align-items:center;}
+.step{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.step-circle{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:700;border:2px solid var(--border);background:var(--white);color:var(--text-muted);position:relative;z-index:1;}
+.step.done .step-circle,.step.active .step-circle{background:var(--blue);border-color:var(--blue);color:var(--white);}
+.step-label{font-size:.68rem;font-weight:600;color:var(--text-muted);letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;}
+.step.done .step-label,.step.active .step-label{color:var(--blue);}
+.step-line{width:72px;height:2px;background:var(--border);margin-bottom:22px;flex-shrink:0;}
+.step-line.done{background:var(--blue);}
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start;}
+.section-title{font-size:1.55rem;font-weight:800;color:var(--text);margin-bottom:4px;}
+.section-sub{font-size:.9rem;color:var(--text-sub);margin-bottom:22px;}
+.cards-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:22px;}
+.card-header{display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:18px;}
+/* CALENDAR */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.cal-nav-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-sub);transition:all .15s;}
+.cal-nav-btn:hover{background:var(--blue-light);color:var(--blue);border-color:var(--blue);}
+.cal-month{font-size:.9rem;font-weight:600;color:var(--text);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.cal-day-label{text-align:center;font-size:.73rem;font-weight:600;color:var(--text-muted);padding:4px 0 8px;}
+.cal-day{text-align:center;font-size:.84rem;color:var(--text);padding:7px 4px;border-radius:8px;cursor:pointer;transition:all .15s;line-height:1;}
+.cal-day:hover:not(.empty):not(.selected){background:var(--blue-light);color:var(--blue);}
+.cal-day.other-month{color:var(--text-muted);}
+.cal-day.today{color:var(--blue);font-weight:700;}
+.cal-day.selected{background:var(--blue);color:var(--white);font-weight:700;border-radius:20%;}
+/* SLOTS */
+.slots-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.slot-btn{border:1.5px solid var(--border);background:var(--white);border-radius:10px;padding:13px 10px;text-align:center;font-size:.875rem;font-weight:500;color:var(--text);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;}
+.slot-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light);}
+.slot-btn.selected{background:var(--blue);color:var(--white);border-color:var(--blue);font-weight:600;}
+/* NANIPAL TIP */
+.nanipal-tip{background:#f0f6ff;border-left:3px solid var(--blue);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;}
+.tip-icon{width:34px;height:34px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.tip-label{font-size:.68rem;font-weight:800;color:var(--blue);letter-spacing:.6px;margin-bottom:4px;}
+.tip-text{font-size:.83rem;color:#374151;line-height:1.5;font-style:italic;}
+/* BOTTOM ACTIONS */
+.bottom-actions{display:flex;align-items:center;justify-content:space-between;margin-top:28px;padding-top:18px;border-top:1px solid var(--border);}
+.back-btn{display:flex;align-items:center;gap:7px;background:none;border:none;cursor:pointer;font-size:.9rem;font-weight:500;color:var(--text-sub);font-family:'Inter',sans-serif;transition:color .15s;}
+.back-btn:hover{color:var(--text);}
+.continue-btn{display:flex;align-items:center;gap:8px;background:var(--green-btn);color:#14532d;border:none;border-radius:28px;padding:13px 32px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s,transform .1s;box-shadow:0 2px 10px rgba(92,221,71,.35);}
+.continue-btn:hover{background:#4ecf3a;transform:translateY(-1px);}
+/* RIGHT COL */
+.right-col{display:flex;flex-direction:column;gap:16px;}
+.assist-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.assist-header{background:var(--blue-light);padding:13px 18px;display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:700;color:var(--blue);}
+.assist-body{padding:16px 18px;display:flex;flex-direction:column;gap:10px;}
+.assist-item{display:flex;align-items:flex-start;gap:8px;font-size:.84rem;color:var(--text);line-height:1.5;}
+.assist-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:6px;}
+.policy-box{background:#f9fafb;border-radius:8px;padding:12px 14px;margin-top:4px;}
+.policy-title{font-size:.72rem;font-weight:700;color:var(--text-sub);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px;}
+.policy-text{font-size:.8rem;color:var(--text-sub);line-height:1.5;}
+.info-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 18px;text-align:center;}
+.info-card-icon{margin-bottom:10px;display:flex;justify-content:center;}
+.info-card h4{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+.info-card p{font-size:.8rem;color:var(--text-sub);line-height:1.5;}
+.hipaa-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:flex;align-items:flex-start;gap:12px;}
+.hipaa-icon{flex-shrink:0;margin-top:2px;}
+.hipaa-card h4{font-size:.875rem;font-weight:700;color:var(--text);margin-bottom:4px;}
+.hipaa-card p{font-size:.8rem;color:var(--text-sub);line-height:1.5;}
+/* FOOTER */
+footer{background:#f1f3f7;border-top:1px solid var(--border);padding:40px 32px 0;}
+.footer-top{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding-bottom:32px;}
+.footer-logo{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.footer-brand-name{font-size:1.1rem;font-weight:700;color:rgb(32, 111, 215);}
+.footer-tagline{font-size:.84rem;color:var(--text-sub);line-height:1.55;max-width:240px;}
+.footer-col h5{font-size:.82rem;font-weight:700;color:var(--text);letter-spacing:.4px;margin-bottom:14px;text-transform:uppercase;}
+.footer-col a{display:block;font-size:.84rem;color:var(--text-sub);text-decoration:none;margin-bottom:9px;transition:color .15s;cursor:pointer;}
+.footer-col a:hover{color:var(--blue);}
+.footer-bottom{border-top:1px solid var(--border);padding:18px 0;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.footer-bottom p{font-size:.78rem;color:var(--text-muted);}
+.footer-bottom a{font-size:.78rem;color:var(--text-muted);text-decoration:none;margin-left:16px;}
+.footer-bottom a:hover{color:var(--blue);}
+.chat-fab{position:fixed;bottom:24px;right:24px;width:50px;height:50px;border-radius:50%;background:var(--blue);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(26,110,245,.4);z-index:500;transition:background .15s;}
+.chat-fab:hover{background:var(--blue-dark);}
+/* RESPONSIVE */
+@media(max-width:900px){
+  .header{padding:0 18px;}
+  .header-tabs{display:none;}
+  .user-text{display:none;}
+  .mob-menu-btn{display:flex;}
+  .page-body{padding:0 18px 40px;}
+  .layout{grid-template-columns:1fr;}
+  .right-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .assist-card{grid-column:1/-1;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .footer-brand{grid-column:1/-1;}
+}
+@media(max-width:640px){
+  .step-circle{width:30px;height:30px;font-size:.78rem;}
+  .step-label{font-size:.6rem;}
+  .step-line{width:36px;}
+  .cards-row{grid-template-columns:1fr;}
+  .right-col{grid-template-columns:1fr;}
+  .section-title{font-size:1.25rem;}
+  .continue-btn{padding:11px 22px;font-size:.875rem;}
+  .footer-top{grid-template-columns:1fr;gap:24px;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;}
+  .footer-bottom a{margin-left:0;margin-top:4px;}
+  .header{height:54px;}
+  .mobile-header-nav{top:54px;}
+}
+@media(max-width:400px){
+  .slots-grid{grid-template-columns:1fr;}
+  .step-line{width:20px;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <a class="logo-box" href="home.html">
+      <img src="assets/logo.png" alt="Jevacare" style="width:32px;height:32px;object-fit:contain;">
+      <span class="brand">Jevacare</span>
+    </a>
+    <nav class="header-tabs">
+      <button class="h-tab active">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#1a6ef5" stroke-width="1.8"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#1a6ef5" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Appointments
+      </button>
+      <button class="h-tab" onclick="window.location.href='Map.html'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="1" y="7" width="13" height="11" rx="1" stroke="#6b7280" stroke-width="1.7"/><path d="M14 10h4l3 3v4h-7V10z" stroke="#6b7280" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.5" cy="19" r="2" stroke="#6b7280" stroke-width="1.7"/><circle cx="17.5" cy="19" r="2" stroke="#6b7280" stroke-width="1.7"/></svg>
+        Track Delivery
+      </button>
+      <button class="h-tab" onclick="window.location.href='index1.html'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#6b7280" stroke-width="1.7"/><path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" stroke="#6b7280" stroke-width="1.7" stroke-linecap="round"/></svg>
+        My Health
+      </button>
+    </nav>
+  </div>
+  <div class="header-right">
+    <button class="bell-btn">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="user-info">
+      <div class="user-text">
+        <div class="user-name">Sarah Ama</div>
+        <div class="user-role">Premium Member</div>
+      </div>
+      <div class="user-avatar">S<div class="user-avatar-dot"></div></div>
+    </div>
+    <button class="mob-menu-btn" id="mobMenuBtn"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-header-nav" id="mobileHeaderNav">
+  <a href="#" class="active">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#1a6ef5" stroke-width="1.8"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#1a6ef5" stroke-width="1.8" stroke-linecap="round"/></svg>
+    Appointments
+  </a>
+  <a href="Map.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="1" y="7" width="13" height="11" rx="1" stroke="#6b7280" stroke-width="1.7"/><path d="M14 10h4l3 3v4h-7V10z" stroke="#6b7280" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.5" cy="19" r="2" stroke="#6b7280" stroke-width="1.7"/><circle cx="17.5" cy="19" r="2" stroke="#6b7280" stroke-width="1.7"/></svg>
+    Track Delivery
+  </a>
+  <a href="index1.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#6b7280" stroke-width="1.7"/><path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" stroke="#6b7280" stroke-width="1.7" stroke-linecap="round"/></svg>
+    My Health
+  </a>
+</nav>
+
+<div class="page-body">
+  <!-- STEPPER -->
+  <div class="stepper-wrap">
+    <div class="stepper">
+      <div class="step done"><div class="step-circle">1</div><div class="step-label">Service</div></div>
+      <div class="step-line done"></div>
+      <div class="step done"><div class="step-circle">2</div><div class="step-label">Specialist</div></div>
+      <div class="step-line done"></div>
+      <div class="step active"><div class="step-circle">3</div><div class="step-label">Schedule</div></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-circle">4</div><div class="step-label">Payment</div></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-circle">5</div><div class="step-label">Confirm</div></div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- LEFT -->
+    <div class="left-col">
+      <h1 class="section-title">Select Date &amp; Time</h1>
+      <p class="section-sub">Find a slot that fits your schedule.</p>
+
+      <div class="cards-row">
+        <!-- CALENDAR -->
+        <div class="card">
+          <div class="card-header">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#374151" stroke-width="1.8"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Calendar
+          </div>
+          <div class="cal-nav">
+            <button class="cal-nav-btn" id="prevMonthBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="cal-month" id="calMonth">March 2026</span>
+            <button class="cal-nav-btn" id="nextMonthBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div class="cal-grid" id="calGrid">
+            <div class="cal-day-label">Su</div><div class="cal-day-label">Mo</div><div class="cal-day-label">Tu</div><div class="cal-day-label">We</div><div class="cal-day-label">Th</div><div class="cal-day-label">Fr</div><div class="cal-day-label">Sa</div>
+          </div>
+        </div>
+
+        <!-- SLOTS -->
+        <div class="card">
+          <div class="card-header">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#374151" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Available Slots
+          </div>
+          <div class="slots-grid">
+            <button class="slot-btn" onclick="selectSlot(this)">09:00 AM</button>
+            <button class="slot-btn" onclick="selectSlot(this)">09:30 AM</button>
+            <button class="slot-btn" onclick="selectSlot(this)">10:00 AM</button>
+            <button class="slot-btn selected" onclick="selectSlot(this)">10:30 AM</button>
+            <button class="slot-btn" onclick="selectSlot(this)">11:00 AM</button>
+            <button class="slot-btn" onclick="selectSlot(this)">02:00 PM</button>
+            <button class="slot-btn" onclick="selectSlot(this)">02:30 PM</button>
+            <button class="slot-btn" onclick="selectSlot(this)">03:00 PM</button>
+          </div>
+          <div class="nanipal-tip">
+            <div class="tip-icon">
+              <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+                <rect x="6" y="12" width="20" height="14" rx="3" fill="white"/>
+                <rect x="11" y="7" width="10" height="6" rx="2" fill="#93c5fd"/>
+                <circle cx="12" cy="19" r="2" fill="#1a6ef5"/>
+                <circle cx="20" cy="19" r="2" fill="#1a6ef5"/>
+                <path d="M12 24h8" stroke="#1a6ef5" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="2" y="15" width="4" height="5" rx="1.5" fill="white"/>
+                <rect x="26" y="15" width="4" height="5" rx="1.5" fill="white"/>
+              </svg>
+            </div>
+            <div class="tip-content">
+              <div class="tip-label">NANIPAL ASSISTANT</div>
+              <div class="tip-text">"Most patients prefer morning slots for checkups. Dr. Emily is usually prompt at 10:30 AM!"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-actions">
+        <button class="back-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <button class="continue-btn">
+          Continue
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="#14532d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right-col">
+      <div class="assist-card">
+        <div class="assist-header">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1a6ef5" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="#1a6ef5" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Booking Assistant
+        </div>
+        <div class="assist-body">
+          <div class="assist-item"><div class="assist-dot"></div><span>You are booking a <strong>General Checkup</strong>.</span></div>
+          <div class="assist-item"><div class="assist-dot"></div><span>Selected provider: <strong>Dr. Emily Chen</strong>.</span></div>
+          <div class="assist-item"><div class="assist-dot"></div><span>Estimated duration: <strong>45 – 60 minutes</strong>.</span></div>
+          <div class="policy-box">
+            <div class="policy-title">Rescheduling Policy</div>
+            <div class="policy-text">Free rescheduling up to 24h prior. Late cancellations may incur a $25 processing fee.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="#1a6ef5" stroke-width="1.7"/><path d="M2 10h20" stroke="#1a6ef5" stroke-width="1.7"/><rect x="5" y="14" width="4" height="2" rx="1" fill="#1a6ef5"/></svg>
+        </div>
+        <h4>Flexible Payments</h4>
+        <p>Secure checkout with credit cards, HSA/FSA, or insurance-direct billing.</p>
+      </div>
+
+      <div class="hipaa-card">
+        <div class="hipaa-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#374151" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#374151" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h4>HIPAA Compliant</h4>
+          <p>Your health data is encrypted and secure. Jevacare adheres to global healthcare security standards.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="14" fill="#1a6ef5"/>
+          <path d="M4 14h4l2-5 3 10 3-7 2 4h6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="footer-brand-name">Jevacare</span>
+      </div>
+      <p class="footer-tagline">Revolutionizing healthcare access through technology and human-centered design.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <a href="#">Find Specialists</a>
+      <a href="#">Pharmacy Delivery</a>
+      <a href="#">Telehealth</a>
+    </div>
+    <div class="footer-col">
+      <h5>Support</h5>
+      <a href="#">Help Center</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Jevacare. All rights reserved.</p>
+    <div>
+      <a href="#">Terms of Service</a>
+      <a href="#">Security</a>
+    </div>
+  </div>
+</footer>
+
+<button class="chat-fab" onclick="window.location.href='chat.html'">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+let currentYear=2026,currentMonth=2,selectedDay=4;
+const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+function renderCalendar(){
+  const grid=document.getElementById("calGrid");
+  document.getElementById("calMonth").textContent=MONTHS[currentMonth]+" "+currentYear;
+  const labels=Array.from(grid.querySelectorAll(".cal-day-label"));
+  grid.innerHTML="";
+  labels.forEach(l=>grid.appendChild(l));
+  const firstDay=new Date(currentYear,currentMonth,1).getDay();
+  const daysInMonth=new Date(currentYear,currentMonth+1,0).getDate();
+  const daysInPrev=new Date(currentYear,currentMonth,0).getDate();
+  const today=new Date();
+  const isCurr=today.getFullYear()===currentYear&&today.getMonth()===currentMonth;
+  for(let i=firstDay-1;i>=0;i--){const d=document.createElement("div");d.className="cal-day other-month";d.textContent=daysInPrev-i;grid.appendChild(d);}
+  for(let d=1;d<=daysInMonth;d++){
+    const el=document.createElement("div");
+    let c="cal-day";
+    if(isCurr&&d===today.getDate())c+=" today";
+    if(d===selectedDay)c+=" selected";
+    el.className=c;el.textContent=d;
+    el.addEventListener("click",()=>{selectedDay=d;renderCalendar();});
+    grid.appendChild(el);
+  }
+  const total=firstDay+daysInMonth;
+  const rem=total%7===0?0:7-(total%7);
+  for(let d=1;d<=rem;d++){const el=document.createElement("div");el.className="cal-day other-month";el.textContent=d;grid.appendChild(el);}
+}
+
+document.getElementById("prevMonthBtn").onclick=()=>{currentMonth--;if(currentMonth<0){currentMonth=11;currentYear--;}renderCalendar();};
+document.getElementById("nextMonthBtn").onclick=()=>{currentMonth++;if(currentMonth>11){currentMonth=0;currentYear++;}renderCalendar();};
+
+function selectSlot(btn){document.querySelectorAll(".slot-btn").forEach(b=>b.classList.remove("selected"));btn.classList.add("selected");}
+
+document.getElementById("mobMenuBtn").onclick=()=>document.getElementById("mobileHeaderNav").classList.toggle("open");
+
+renderCalendar();
+</script>
+</body>
+</html>

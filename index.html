@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jevacare</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LEFT IMAGE -->
+
+<div class="left">
+<img src="assets/welcome.png" class="illustration">
+</div>
+
+
+<!-- RIGHT AUTH AREA -->
+
+<div class="right">
+
+<div class="login-box">
+
+<h1>Welcome back</h1>
+
+<p class="subtitle">
+Access your personalized health dashboard and care team.
+</p>
+
+
+<!-- TABS -->
+
+<div class="tabs">
+
+<button id="signinTab" class="active">Sign In</button>
+
+<button id="signupTab">Create Account</button>
+
+</div>
+
+
+
+<!-- SIGN IN FORM -->
+
+<div id="signinForm">
+
+<div class="social-login">
+
+<button class="social-btn">
+<img src="assets/logos/google.svg">
+Google
+</button>
+
+<button class="social-btn">
+<img src="assets/logos/apple.svg">
+Apple
+</button>
+
+</div>
+
+
+<div class="divider">
+<span>OR CONTINUE WITH EMAIL</span>
+</div>
+
+
+<form class="login-form">
+
+<label>Email address</label>
+
+<input type="email" placeholder="name@example.com">
+
+
+<div class="password-row">
+
+<label>Password</label>
+
+<a href="#">Forgot password?</a>
+
+</div>
+
+<input type="password" placeholder="••••••••">
+
+
+<button class="signin-btn" onclick="window.location.href='home.html'">
+    Sign In →
+</button>
+
+
+</form>
+
+
+<p class="signup-text">
+
+Don't have an account?
+<a href="#" id="signupLink">Sign up</a>
+
+</p>
+
+</div>
+
+
+
+
+<!-- SIGN UP FORM -->
+
+<div id="signupForm" style="display:none">
+
+<form class="login-form">
+
+<label>Full Name</label>
+
+<input type="text" placeholder="John Doe">
+
+
+<label>Email address</label>
+
+<input type="email" placeholder="name@example.com">
+
+
+<label>Password</label>
+
+<input type="password" placeholder="Create password">
+
+
+<label>Confirm Password</label>
+
+<input type="password" placeholder="Confirm password">
+
+
+<button class="signin-btn" onclick="window.location.href='home.html'">
+
+Create Account →
+
+</button>
+
+</form>
+
+
+<p class="signup-text">
+
+Already have an account?
+<a href="#" id="signinLink">Sign In</a>
+
+</p>
+
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+
+
+<!-- BRAND -->
+
+<div class="brand">
+
+<h2>Jevacare</h2>
+<p>For Everyone</p>
+
+</div>
+
+
+
+<script>
+
+const signinTab = document.getElementById("signinTab")
+const signupTab = document.getElementById("signupTab")
+
+const signinForm = document.getElementById("signinForm")
+const signupForm = document.getElementById("signupForm")
+
+const signupLink = document.getElementById("signupLink")
+const signinLink = document.getElementById("signinLink")
+
+
+function showSignup(){
+
+signinForm.style.display="none"
+signupForm.style.display="block"
+
+signupTab.classList.add("active")
+signinTab.classList.remove("active")
+
+}
+
+function showSignin(){
+
+signinForm.style.display="block"
+signupForm.style.display="none"
+
+signinTab.classList.add("active")
+signupTab.classList.remove("active")
+
+}
+
+signupTab.onclick = showSignup
+signinTab.onclick = showSignin
+
+signupLink.onclick = showSignup
+signinLink.onclick = showSignin
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JEVACare – Find Your Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="jevacare-doctors.css"/>
+</head>
+<body>
+
+
+<nav class="navbar">
+  <div class="nav-inner">
+
+    <div class="nav-logo">
+     <img src="jevacare.jpeg" alt="Jevacare Logo" class="logo-img"/>  
+    <span style="color: rgb(32, 96, 199)">Jevacare</span>
+   </div>
+
+    <div class="nav-search-box">
+      <svg width="16" height="14" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="#9CA3AF" stroke-width="1.8"/><path d="M13.5 13.5L17 17" stroke="#9CA3AF" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input placeholder="Search doctors, meds..." />
+    </div>
+
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="jevacare-doctors.html" class="nav-active">Doctors</a>
+      <a href="jevacare-pharmacy.html">Pharmacies</a>
+      <a href="appointment.html">Book</a>
+      <a href="chat.html">Chat</a>
+  </div>
+
+    <div class="nav-actions">
+      <button class="nav-bell">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="avatar-circle">S</div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+<div class="page-body">
+
+  
+  <aside class="sidebar">
+    <h3 class="sidebar-title">Search Filters</h3>
+
+    
+    <div class="filter-group">
+      <label class="filter-label">DOCTOR NAME</label>
+      <div class="filter-input-wrap">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="#9CA3AF" stroke-width="1.8"/><path d="M13.5 13.5L17 17" stroke="#9CA3AF" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input type="text" placeholder="Enter name..." id="nameFilter"/>
+      </div>
+    </div>
+
+    
+    <div class="filter-group">
+      <label class="filter-label">LOCATION</label>
+      <div class="filter-input-wrap">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="#9CA3AF" stroke-width="1.8" fill="none"/></svg>
+        <input type="text" placeholder="City or Zip..."/>
+      </div>
+    </div>
+
+  
+    <div class="filter-group">
+      <div class="filter-group-header" onclick="toggleSection('specialty')">
+        <label class="filter-label">Specialty</label>
+        <svg class="chevron" id="chevron-specialty" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="filter-options" id="specialty">
+        <label class="checkbox-label"><input type="checkbox" value="Cardiology" onchange="filterDoctors()"/> Cardiology</label>
+        <label class="checkbox-label"><input type="checkbox" value="Pediatrics" onchange="filterDoctors()"/> Pediatrics</label>
+        <label class="checkbox-label"><input type="checkbox" value="Neurology" onchange="filterDoctors()"/> Neurology</label>
+        <label class="checkbox-label"><input type="checkbox" value="Orthopedics" onchange="filterDoctors()"/> Orthopedics</label>
+        <label class="checkbox-label"><input type="checkbox" value="Dermatology" onchange="filterDoctors()"/> Dermatology</label>
+        <label class="checkbox-label"><input type="checkbox" value="General Medicine" onchange="filterDoctors()"/> General Medicine</label>
+      </div>
+    </div>
+
+  
+    <div class="filter-group">
+      <div class="filter-group-header" onclick="toggleSection('rating')">
+        <label class="filter-label">Patient Rating</label>
+        <svg class="chevron" id="chevron-rating" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="filter-options" id="rating">
+       <label class="checkbox-label">
+  <input type="checkbox" onchange="filterDoctors()"/> 4.5+ Stars
+  <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+</label>
+<label class="checkbox-label">
+  <input type="checkbox" onchange="filterDoctors()"/> 4+ Stars
+  <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+</label>
+<label class="checkbox-label">
+  <input type="checkbox" onchange="filterDoctors()"/> 3+ Stars
+  <span class="stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+</label>
+      </div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-group-header" onclick="toggleSection('availability')">
+        <label class="filter-label">Availability</label>
+        <svg class="chevron" id="chevron-availability" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="filter-options" id="availability">
+        <label class="checkbox-label"><input type="checkbox" onchange="filterDoctors()"/> Available Today</label>
+        <label class="checkbox-label"><input type="checkbox" onchange="filterDoctors()"/> Available Tomorrow</label>
+        <label class="checkbox-label"><input type="checkbox" onchange="filterDoctors()"/> Weekend Availability</label>
+      </div>
+    </div>
+
+    <button class="btn-apply" onclick="filterDoctors()">Apply Filters</button>
+  </aside>
+
+
+
+  <main class="main-content">
+
+   
+    <div class="breadcrumb">
+      <span class="breadcrumb-dir">DIRECTORY</span>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">SEARCH RESULTS</span>
+    </div>
+
+    <h1 class="page-h1">Find Your Specialist</h1>
+    <p class="page-sub">Browse top-rated healthcare providers near you.</p>
+
+    <div class="quick-picks">
+      <button class="quick-pill active" onclick="quickFilter(this,'Cardiology')">Cardiology</button>
+      <button class="quick-pill" onclick="quickFilter(this,'Neurology')">Neurology</button>
+      <button class="quick-pill" onclick="quickFilter(this,'available')">Available Today</button>
+      <button class="quick-pill" onclick="quickFilter(this,'top')">Top Rated</button>
+    </div>
+
+    <div class="results-bar">
+      <span class="results-count" id="resultsCount">6 Doctors available in your area</span>
+      <div class="sort-wrap">
+        <span class="sort-label">Sort by:</span>
+        <select class="sort-select" onchange="sortDoctors(this.value)">
+          <option value="relevance">Relevance</option>
+          <option value="rating">Rating</option>
+          <option value="experience">Experience</option>
+        </select>
+      </div>
+    </div>
+
+    
+    <div class="doctors-grid" id="doctorsGrid">
+
+      
+      <div class="doctor-card" data-specialty="Cardiology" data-rating="4.9" data-available="tomorrow">
+        <div class="doctor-card-top">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=80&h=80&fit=crop&crop=face" alt="Dr. Aris Yaw" class="doctor-img"/>
+          <div class="doctor-info">
+            <div class="doctor-name-row">
+              <h3 class="doctor-name">Dr. Aris Yaw</h3>
+              <div class="doctor-rating">&#9734; 4.9</div>
+            </div>
+            <div class="specialty-tag">Cardiologist</div>
+            <div class="doctor-exp">15+ Years Exp &nbsp;|&nbsp; 128 Reviews</div>
+            <p class="doctor-desc">Specializing in preventive cardiology and advanced heart failure management with...</p>
+            <div class="doctor-meta">
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#6B7280"/></svg>
+                Central Medical Hub, Accra
+              </span>
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#6B7280" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="#6B7280" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Next: Tomorrow, 09:00 AM
+              </span>
+            </div>
+          </div>
+          <div class="online-dot-wrap">
+            <span class="online-dot"></span>
+            <span class="online-label">Online Now</span>
+          </div>
+        </div>
+        <div class="doctor-card-bottom">
+          <span class="consult-free">CONSULTATION FREE</span>
+          <div class="card-actions">
+            <button class="btn-view" onclick="window.location.href='last.html'">View Profile</button>
+            <button class="btn-book" onclick="window.location.href='appointment.html'">Book Appointment</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="doctor-card" data-specialty="Pediatrics" data-rating="4.8" data-available="today">
+        <div class="doctor-card-top">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=80&h=80&fit=crop&crop=face" alt="Dr. Sarah Akosua" class="doctor-img"/>
+          <div class="doctor-info">
+            <div class="doctor-name-row">
+              <h3 class="doctor-name">Dr. Sarah Akosua</h3>
+              <div class="doctor-rating">&#9734; 4.8</div>
+            </div>
+            <div class="specialty-tag specialty-pediatrics">Pediatrician</div>
+            <div class="doctor-exp">8 Years Exp &nbsp;|&nbsp; 215 Reviews</div>
+            <p class="doctor-desc">Dedicated to providing compassionate care for children from infancy through adolescence in...</p>
+            <div class="doctor-meta">
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#6B7280"/></svg>
+                Bright Smiles Clinic
+              </span>
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#6B7280" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="#6B7280" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Next: Today, 01:00 PM
+              </span>
+            </div>
+          </div>
+          <div class="online-dot-wrap">
+            <span class="online-dot"></span>
+            <span class="online-label">Online Now</span>
+          </div>
+        </div>
+        <div class="doctor-card-bottom">
+          <span class="consult-free">CONSULTATION FREE</span>
+          <div class="card-actions">
+            <button class="btn-view">View Profile</button>
+            <button class="btn-book" onclick="window.location.href='appointment.html'">Book Appointment</button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="doctor-card" data-specialty="Neurology" data-rating="4.7" data-available="tomorrow">
+        <div class="doctor-card-top">
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=80&h=80&fit=crop&crop=face" alt="Dr. Michael Kwame" class="doctor-img"/>
+          <div class="doctor-info">
+            <div class="doctor-name-row">
+              <h3 class="doctor-name">Dr. Michael Kwame</h3>
+              <div class="doctor-rating">&#9734; 4.7</div>
+            </div>
+            <div class="specialty-tag specialty-neuro">Neurologist</div>
+            <div class="doctor-exp">12 Years Exp &nbsp;|&nbsp; 89 Reviews</div>
+            <p class="doctor-desc">Expert in treating complex neurological disorders, including migraines, epilepsy, and...</p>
+            <div class="doctor-meta">
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#6B7280"/></svg>
+                NeuroScience Center, Tema
+              </span>
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#6B7280" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="#6B7280" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Next: Mon, Oct 23
+              </span>
+            </div>
+          </div>
+          <div class="online-dot-wrap">
+            <span class="online-dot"></span>
+            <span class="online-label">Online Now</span>
+          </div>
+        </div>
+        <div class="doctor-card-bottom">
+          <span class="consult-free">CONSULTATION FREE</span>
+          <div class="card-actions">
+            <button class="btn-view">View Profile</button>
+            <button class="btn-book" onclick="window.location.href='appointment.html'">Book Appointment</button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="doctor-card" data-specialty="Orthopedics" data-rating="5.0" data-available="tomorrow">
+        <div class="doctor-card-top">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=80&h=80&fit=crop&crop=face" alt="Dr. Elena Kwabena" class="doctor-img"/>
+          <div class="doctor-info">
+            <div class="doctor-name-row">
+              <h3 class="doctor-name">Dr. Elena Kwabena</h3>
+              <div class="doctor-rating">&#9734; 5.0</div>
+            </div>
+            <div class="specialty-tag specialty-ortho">Orthopedic Surgeon</div>
+            <div class="doctor-exp">20 Years Exp &nbsp;|&nbsp; 342 Reviews</div>
+            <p class="doctor-desc">Board-certified surgeon focusing on sports injuries, joint replacements, and minimally...</p>
+            <div class="doctor-meta">
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#6B7280"/></svg>
+                SportSurg Institute, Koforidua
+              </span>
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#6B7280" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="#6B7280" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Next: Wed, Oct 25
+              </span>
+            </div>
+          </div>
+          <div class="online-dot-wrap">
+            <span class="online-dot"></span>
+            <span class="online-label">Online Now</span>
+          </div>
+        </div>
+        <div class="doctor-card-bottom">
+          <span class="consult-free">CONSULTATION FREE</span>
+          <div class="card-actions">
+            <button class="btn-view">View Profile</button>
+            <button class="btn-book" onclick="window.location.href='appointment.html'">Book Appointment</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="doctor-card" data-specialty="Dermatology" data-rating="4.6" data-available="today">
+        <div class="doctor-card-top">
+          <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=80&h=80&fit=crop&crop=face" alt="Dr. James Kusi" class="doctor-img"/>
+          <div class="doctor-info">
+            <div class="doctor-name-row">
+              <h3 class="doctor-name">Dr. James Kusi</h3>
+              <div class="doctor-rating">&#9734; 4.6</div>
+            </div>
+            <div class="specialty-tag specialty-derm">Dermatologist</div>
+            <div class="doctor-exp">6 Years Exp &nbsp;|&nbsp; 156 Reviews</div>
+            <p class="doctor-desc">Providing comprehensive medical and cosmetic dermatology services for all skin...</p>
+            <div class="doctor-meta">
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#6B7280"/></svg>
+                ClearSkin Studio, Jersey City
+              </span>
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#6B7280" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="#6B7280" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Next: Today, 02:30 PM
+              </span>
+            </div>
+          </div>
+          <div class="online-dot-wrap">
+            <span class="online-dot"></span>
+            <span class="online-label">Online Now</span>
+          </div>
+        </div>
+        <div class="doctor-card-bottom">
+          <span class="consult-free">CONSULTATION FREE</span>
+          <div class="card-actions">
+            <button class="btn-view">View Profile</button>
+            <button class="btn-book" onclick="window.location.href='appointment.html'">Book Appointment</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="doctor-card" data-specialty="General Medicine" data-rating="4.9" data-available="tomorrow">
+        <div class="doctor-card-top">
+          <img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=80&h=80&fit=crop&crop=face" alt="Dr. Sophia Akua" class="doctor-img"/>
+          <div class="doctor-info">
+            <div class="doctor-name-row">
+              <h3 class="doctor-name">Dr. Sophia Akua</h3>
+              <div class="doctor-rating">&#9734; 4.9</div>
+            </div>
+            <div class="specialty-tag specialty-general">General Practitioner</div>
+            <div class="doctor-exp">10 Years Exp &nbsp;|&nbsp; 412 Reviews</div>
+            <p class="doctor-desc">Passionate about holistic family medicine and long-term wellness partnerships with patients...</p>
+            <div class="doctor-meta">
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#6B7280"/></svg>
+                Family Health First, Queens
+              </span>
+              <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#6B7280" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="#6B7280" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Next: Tomorrow, 08:30 AM
+              </span>
+            </div>
+          </div>
+          <div class="online-dot-wrap">
+            <span class="online-dot"></span>
+            <span class="online-label">Online Now</span>
+          </div>
+        </div>
+        <div class="doctor-card-bottom">
+          <span class="consult-free">CONSULTATION FREE</span>
+          <div class="card-actions">
+            <button class="btn-view">View Profile</button>
+            <button class="btn-book" onclick="window.location.href='appointment.html'">Book Appointment</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="no-results" id="noResults" style="display:none;">
+      <p>No doctors found matching your filters. Try adjusting your search.</p>
+    </div>
+
+    <div class="pagination">
+      <button class="page-btn" id="prevPage" onclick="changePage(-1)">&#8249;</button>
+      <button class="page-btn active" id="page1" onclick="goToPage(1)">1</button>
+      <button class="page-btn" id="page2" onclick="goToPage(2)">2</button>
+      <button class="page-btn" id="page3" onclick="goToPage(3)">3</button>
+      <span class="page-dots">...</span>
+      <button class="page-btn" onclick="goToPage(12)">12</button>
+      <button class="page-btn" id="nextPage" onclick="changePage(1)">&#8250;</button>
+    </div>
+
+  </main>
+</div>
+
+
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        
+    <img src="jevacare.jpeg" alt="Jevacare Logo" class="logo-img"/>  
+    <span style="color: rgb(32, 96, 199);">Jevacare</span>
+  </div>
+        
+      
+      <p class="footer-desc">Jevacare is your all-in-one health companion, bringing professional care to your fingertips.</p>
+    </div>
+    <div class="footer-col">
+      <h6 class="footer-heading">Platform</h6>
+      <a href="jevacare-doctors.html" class="footer-link">Doctors</a>
+      <a href="jevacare-pharmacy.html" class="footer-link">Pharmacies</a>
+      <a href="" class="footer-link">Pricing</a>
+      <a href="chat.html" class="footer-link">Nanipal AI</a>
+    </div>
+    <div class="footer-col">
+      <h6 class="footer-heading">Company</h6>
+      <a href="#" class="footer-link">About Us</a>
+      <a href="#" class="footer-link">Careers</a>
+      <a href="#" class="footer-link">Press</a>
+      <a href="#" class="footer-link">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h6 class="footer-heading">Legal</h6>
+      <a href="#" class="footer-link">Privacy Policy</a>
+      <a href="#" class="footer-link">Terms of Service</a>
+      <a href="#" class="footer-link">Cookie Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 Jevacare. All rights reserved.</div>
+</footer>
+
+<script src="jevacare-doctors.js"></script>
+</body>
+</html>

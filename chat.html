@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jevacare Chat</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #2234ff;
+  --blue-dark: #1558cc;
+  --blue-light: #e8f0fe;
+  --green-bubble: #8fe004;
+  --green-live: #22c55e;
+  --orange-dot: #f59e0b;
+  --grey-dot: #9ca3af;
+  --text: #111827;
+  --text-sub: #6b7280;
+  --text-muted: #9ca3af;
+  --border: #dddddd;
+  --bg: #ffffff;
+  --white: #ffffff;
+  --sidebar-w: 320px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── HEADER ── */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--white); padding: 0 24px; height: 64px;
+  border-bottom: 1px solid var(--border); flex-shrink: 0;
+  z-index: 200; position: relative;
+}
+.nav-left { display: flex; align-items: center; gap: 18px; }
+.logo-box  { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.brand     { font-size: 1.2rem; font-weight: 700; color: #1366cb; letter-spacing: -0.3px; }
+
+.search-box {
+  display: flex; align-items: center; gap: 8px;
+  background: #f9fafb; border: 1px solid var(--border);
+  border-radius: 24px; padding: 8px 18px; width: 240px;
+}
+.search-box input {
+  border: none; background: transparent; outline: none;
+  font-size: 0.875rem; color: var(--text); width: 100%;
+  font-family: 'Inter', sans-serif;
+}
+.search-box input::placeholder { color: var(--text-muted); }
+
+.nav-menu { display: flex; align-items: center; gap: 4px; }
+.nav-menu a {
+  text-decoration: none; font-size: 0.925rem; font-weight: 500;
+  color: #374151; padding: 8px 16px; border-radius: 8px; cursor: pointer;
+  transition: color .15s, background .15s; white-space: nowrap;
+}
+.nav-menu a:hover { color: var(--blue); background: var(--blue-light); }
+.nav-menu a.active {
+  background: var(--blue); color: var(--white);
+  border-radius: 24px; padding: 8px 22px; font-weight: 600;
+}
+
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.bell-btn {
+  background: none; border: none; cursor: pointer; color: #374151;
+  padding: 6px; display: flex; align-items: center; border-radius: 8px;
+  transition: background .15s;
+}
+.bell-btn:hover { background: var(--bg); }
+
+.profile-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg,#22c55e,#16a34a);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-weight: 700; font-size: .95rem;
+  cursor: pointer; position: relative; border: 2px solid #d1fae5;
+}
+.profile-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: #74d80a;
+  border: 2px solid #fff; position: absolute; bottom: 0; right: 0;
+}
+
+/* Hamburger */
+.menu-toggle {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px; background: none; border: none;
+}
+.menu-toggle span { width: 22px; height: 2px; background: #374151; border-radius: 2px; display: block; }
+
+/* Mobile nav dropdown */
+.mobile-nav {
+  display: none; position: absolute; top: 64px; left: 0; right: 0;
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 8px 16px 14px; flex-direction: column; gap: 2px;
+  z-index: 190; box-shadow: 0 4px 16px rgba(0,0,0,.08);
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  text-decoration: none; font-size: .95rem; font-weight: 500;
+  color: #374151; padding: 10px 14px; border-radius: 8px; cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.mobile-nav a:hover { background: var(--blue-light); color: var(--blue); }
+.mobile-nav a.active { background: var(--blue); color: var(--white); }
+
+/* ── MAIN ── */
+.main { display: flex; flex: 1; overflow: hidden; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w); min-width: var(--sidebar-w);
+  background: #fbfdff; border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0;
+}
+.sidebar-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 20px 12px;
+}
+.sidebar-top h3 { font-size: 1.1rem; font-weight: 700; }
+.add-btn {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--white);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: #374151; transition: all .15s;
+}
+.add-btn:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
+
+.search-conv {
+  margin: 0 16px 10px; display: flex; align-items: center; gap: 8px;
+  background: #f9fafb; border: 1px solid var(--border);
+  border-radius: 10px; padding: 9px 14px;
+}
+.search-conv input {
+  border: none; background: transparent; outline: none;
+  font-size: .875rem; color: var(--text); width: 100%;
+  font-family: 'Inter', sans-serif;
+}
+.search-conv input::placeholder { color: var(--text-muted); }
+
+.chat-list { flex: 1; overflow-y: auto; padding: 0 8px; }
+.chat-list::-webkit-scrollbar { width: 4px; }
+.chat-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.chat-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 12px; border-radius: 12px; cursor: pointer;
+  transition: background .15s; margin-bottom: 2px;
+  border-left: 3px solid transparent;
+}
+.chat-item:hover { background: #f9fafb; }
+.chat-item.active { background: var(--blue-light); border-left: 3px solid var(--blue); }
+.chat-item.active .item-name { color: var(--blue); font-weight: 700; }
+
+/* Avatars */
+.av {
+  width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; position: relative;
+}
+.av-nanipal { background: #ffffff; }
+.av-doctor  { background: #10c400; }
+.av-pharma  { background: #cbd5e1; }
+.av-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--white); position: absolute; bottom: 1px; right: 1px;
+}
+.dot-green  { background: #43c522; }
+.dot-orange { background: #f59e0b; }
+.dot-grey   { background: #9ca3af; }
+
+.item-info { flex: 1; min-width: 0; }
+.item-row  { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+.item-name { font-size: .9rem; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item-time { font-size: .75rem; color: var(--text-muted); flex-shrink: 0; }
+.item-prev { font-size: .8rem; color: var(--text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.unread {
+  min-width: 20px; height: 20px; background: var(--blue); color: var(--white);
+  border-radius: 10px; font-size: .7rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 5px; flex-shrink: 0;
+}
+
+.sidebar-footer {
+  padding: 14px 18px; border-top: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 10px; background: #fafbff;
+}
+.sf-icon {
+  width: 30px; height: 30px; border-radius: 50%; background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.sidebar-footer p { font-size: .76rem; color: var(--text-sub); line-height: 1.45; }
+
+/* ── CHAT AREA ── */
+.chat-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+.chat-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; background: var(--white);
+  border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.chat-user-left { display: flex; align-items: center; gap: 13px; }
+.ch-avatar {
+  width: 44px; height: 44px; border-radius: 50%; background: #dbeafe;
+  display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0;
+}
+.ch-dot {
+  width: 11px; height: 11px; border-radius: 50%; background: #22c55e;
+  border: 2px solid #fff; position: absolute; bottom: 1px; right: 1px;
+}
+.ch-name {
+  font-size: 1.025rem; font-weight: 700; color: var(--text);
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.verified-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #e3effe; color: #3576ee;
+  font-size: .72rem; font-weight: 600;
+  padding: 2px 9px; border-radius: 12px;
+}
+.ch-status { font-size: .8rem; color: #898989; font-weight: 500; margin-top: 2px; }
+
+.chat-header-right { display: flex; align-items: center; gap: 10px; }
+.escalate-btn {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--blue); color: var(--white); border: none;
+  border-radius: 24px; padding: 9px 20px;
+  font-size: .875rem; font-weight: 600; cursor: pointer;
+  font-family: 'Inter', sans-serif; white-space: nowrap;
+  transition: background .15s, transform .1s;
+}
+.escalate-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+.more-btn {
+  background: none; border: none; cursor: pointer; color: #374151;
+  padding: 6px 8px; border-radius: 8px; display: flex; align-items: center;
+  transition: background .15s;
+}
+.more-btn:hover { background: var(--bg); }
+
+/* ── MESSAGES ── */
+.chat-body {
+  flex: 1; overflow-y: auto; padding: 20px 28px 10px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.chat-body::-webkit-scrollbar { width: 5px; }
+.chat-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.enc-banner {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; padding: 10px 22px;
+  font-size: .75rem; font-weight: 600; color: #4b5563;
+  letter-spacing: .6px; margin: 0 auto 14px; width: fit-content;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+
+.msg-row { display: flex; flex-direction: column; max-width: 65%; margin-bottom: 12px; }
+.msg-row.bot  { align-self: flex-start; }
+.msg-row.user { align-self: flex-end; }
+
+.msg-label {
+  font-size: .7rem; font-weight: 700; color: #77b2ff;
+  letter-spacing: .5px; margin-bottom: 5px;
+  display: flex; align-items: center; gap: 5px;
+}
+.bubble {
+  padding: 14px 18px; border-radius: 16px;
+  font-size: .9rem; line-height: 1.6; color: var(--text);
+}
+.msg-row.bot .bubble {
+  background: #e9f2fa; border: 1px solid var(--border);
+  border-bottom-left-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  border-top-left-radius: 2px; border-color: #d3e6ff;
+}
+.msg-row.user .bubble {
+  background: var(--green-bubble); color: #14532d;
+  border-bottom-right-radius: 4px; font-weight: 500;
+}
+.msg-time { font-size: .73rem; color: var(--text-muted); margin-top: 5px; }
+.msg-row.user .msg-time { text-align: right; }
+
+.analyzing {
+  text-align: center; font-size: .73rem; font-weight: 700;
+  color: var(--text-muted); letter-spacing: 1px; margin: 8px 0 6px;
+}
+
+.typing-row { display: flex; align-self: flex-start; margin-bottom: 8px; }
+.typing-dots {
+  display: flex; align-items: center; gap: 5px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 14px; border-bottom-left-radius: 4px; padding: 12px 16px;
+}
+.typing-dots span {
+  width: 7px; height: 7px; background: #d1d5db; border-radius: 50%;
+  animation: bounce 1.2s infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: .18s; }
+.typing-dots span:nth-child(3) { animation-delay: .36s; }
+@keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px);background:var(--blue);} }
+
+/* ── QUICK ACTIONS ── */
+.quick-actions {
+  display: flex; gap: 10px; padding: 8px 28px 6px;
+  flex-wrap: wrap; flex-shrink: 0; background: var(--bg);
+}
+.qa-btn {
+  display: flex; align-items: center; gap: 6px;
+  border: 1.5px solid var(--border); background: #f8f8f8;
+  border-radius: 20px; padding: 8px 16px;
+  font-size: .825rem; font-weight: 500; color: #374151;
+  cursor: pointer; font-family: 'Inter', sans-serif; transition: all .15s;
+}
+.qa-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+
+/* ── INPUT ── */
+.input-wrap { padding: 6px 20px 10px; background: var(--bg); flex-shrink: 0; }
+.input-box {
+  background: var(--white); border: 1.5px solid #d1d5db;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06); transition: border-color .15s;
+}
+.input-box:focus-within { border-color: var(--blue); }
+.input-box textarea {
+  width: 100%; padding: 14px 18px 4px; border: none; outline: none;
+  resize: none; font-size: .9rem; font-family: 'Inter', sans-serif;
+  color: var(--text); background: #f8f7f7;
+  min-height: 46px; max-height: 130px; line-height: 1.5;
+}
+.input-box textarea::placeholder { color: var(--text-muted); }
+.input-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 14px 12px; background: #f8f7f7;
+}
+.input-icons { display: flex; align-items: center; gap: 2px; }
+.icon-btn {
+  width: 36px; height: 36px; border: none; background: transparent;
+  cursor: pointer; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #6b7280; transition: background .15s, color .15s;
+}
+.icon-btn:hover { background: var(--bg); color: var(--blue); }
+.md-hint { font-size: .76rem; color: grey; padding-left: 400px; }
+.send-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: #efefef; color: grey; border: none;
+  border-radius: 15px; padding: 10px 20px;
+  font-size: .875rem; font-weight: 600; cursor: pointer;
+  font-family: 'Inter', sans-serif; transition: background .15s, transform .1s;
+}
+.send-btn:hover { background: #1032f7; transform: translateY(-1px); color: white; }
+
+.disclaimer {
+  text-align: center; font-size: .72rem; color: var(--text-muted);
+  padding: 4px 20px 10px; font-style: italic; background: var(--bg); flex-shrink: 0;
+}
+
+/* ── SECURITY MODAL ── */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.3); z-index: 400; }
+.overlay.show { display: block; }
+.sec-modal {
+  display: none; position: fixed; top: 50%; left: 50%;
+  transform: translate(-50%,-50%); background: var(--white);
+  border-radius: 18px; padding: 32px 36px; z-index: 401;
+  box-shadow: 0 12px 40px rgba(0,0,0,.15); text-align: center; width: 340px;
+}
+.sec-modal.show { display: block; }
+.sec-modal h3 { font-size: 1.05rem; font-weight: 700; margin: 14px 0 10px; }
+.sec-modal p  { font-size: .84rem; color: var(--text-sub); line-height: 1.55; }
+.sec-modal button {
+  margin-top: 18px; background: var(--blue); color: var(--white);
+  border: none; border-radius: 8px; padding: 10px 28px;
+  font-size: .875rem; font-weight: 600; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.sec-modal button:hover { background: var(--blue-dark); }
+
+/* ── FLOATING BUTTON ── */
+.floating-btn {
+  display: none; position: fixed; bottom: 24px; right: 24px;
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--blue); color: var(--white); border: none; cursor: pointer;
+  z-index: 300; box-shadow: 0 4px 16px rgba(26,110,245,.45);
+  align-items: center; justify-content: center; transition: background .15s;
+}
+.floating-btn:hover { background: var(--blue-dark); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .sidebar {
+    position: fixed; left: -400px; top: 64px; bottom: 0;
+    z-index: 150; transition: left .3s;
+    box-shadow: 4px 0 20px rgba(0,0,0,.1);
+  }
+  .sidebar.show { left: 0; }
+  .floating-btn { display: flex; }
+  .search-box, .nav-menu { display: none; }
+  .menu-toggle { display: flex; }
+  .chat-body { padding: 16px 14px 8px; }
+  .quick-actions { padding: 6px 14px; }
+  .input-wrap { padding: 4px 10px 10px; }
+}
+@media (max-width: 520px) {
+  .ch-name { font-size: .9rem; }
+  .escalate-btn { padding: 8px 14px; font-size: .78rem; }
+  .msg-row { max-width: 85%; }
+  .bubble { padding: 11px 14px; font-size: .86rem; }
+}
+
+#fileInput, #imageInput { display: none; }
+</style>
+<link rel="stylesheet" href="chat.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="nav-left">
+    <div class="logo-box">
+      <img src="assets/logo.png" alt="Jevacare" style="width:34px;height:34px;object-fit:contain;">
+      <span class="brand">Jevacare</span>
+    </div>
+    <div class="search-box">
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6.5" stroke="#9ca3af" stroke-width="1.8"/><path d="M14.5 14.5L18 18" stroke="#9ca3af" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input type="text" placeholder="Search doctors, meds...">
+    </div>
+  </div>
+
+  <nav class="nav-menu">
+    <a href="home.html">Home</a>
+    <a href="jevacare-doctors.html">Doctors</a>
+    <a href="jevacare-pharmacy.html">Pharmacies</a>
+    <a href="appointment.html">Book</a>
+    <a href="chat.html" class="active">Chat</a>
+  </nav>
+
+  <div class="nav-right">
+    <button class="bell-btn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="profile-avatar">J<div class="profile-dot"></div></div>
+  </div>
+
+  <button class="menu-toggle" id="menuToggle">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="home.html">Home</a>
+  <a href="jevacare-doctors.html">Doctors</a>
+  <a href="jevacare-pharmacy.html">Pharmacies</a>
+  <a href="appointment.html">Book</a>
+  <a href="chat.html" class="active">Chat</a>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+
+    <div class="sidebar-top">
+      <h3>Messages</h3>
+      <button class="add-btn">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="blue" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="search-conv">
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6.5" stroke="#9ca3af" stroke-width="1.8"/><path d="M14.5 14.5L18 18" stroke="#9ca3af" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input type="text" id="searchChat" placeholder="Search conversations...">
+    </div>
+
+    <div class="chat-list" id="chatList">
+
+      <!-- Nanipal -->
+      <div class="chat-item active" data-id="nanipal" data-title="Nanipal AI Assistant" data-status="Active now">
+        <div class="av av-nanipal">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+            <rect x="6" y="12" width="20" height="14" rx="3" fill="#1a6ef5"/>
+            <rect x="11" y="7" width="10" height="6" rx="2" fill="#93c5fd"/>
+            <circle cx="12" cy="19" r="2" fill="white"/>
+            <circle cx="20" cy="19" r="2" fill="white"/>
+            <path d="M12 24h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M16 7V5" stroke="#1a6ef5" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="16" cy="4" r="1.5" fill="#1a6ef5"/>
+            <rect x="2" y="15" width="4" height="5" rx="1.5" fill="#93c5fd"/>
+            <rect x="26" y="15" width="4" height="5" rx="1.5" fill="#93c5fd"/>
+          </svg>
+          <div class="av-dot dot-green"></div>
+        </div>
+        <div class="item-info">
+          <div class="item-row">
+            <span class="item-name">Nanipal AI Assistant</span>
+            <span class="item-time">10:45 AM</span>
+          </div>
+          <div class="item-prev">I've analyzed your symptoms. It so...</div>
+        </div>
+      </div>
+
+      <!-- Dr. Sarah -->
+      <div class="chat-item" data-id="sarah" data-title="Dr. Sarah" data-status="Online">
+        <div class="av av-doctor">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8.5" r="3.5" fill="black"/>
+            <path d="M5 21c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="black" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <div class="av-dot dot-orange"></div>
+        </div>
+        <div class="item-info">
+          <div class="item-row">
+            <span class="item-name">Dr. Sarah</span>
+            <span class="item-time">Yesterday</span>
+          </div>
+          <div class="item-prev">Please remember to take your med...</div>
+        </div>
+        <div class="unread">2</div>
+      </div>
+
+      <!-- Dr. Marcus -->
+      <div class="chat-item" data-id="marcus" data-title="Dr. Marcus" data-status="Away">
+        <div class="av av-doctor">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8.5" r="3.5" fill="black"/>
+            <path d="M5 21c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="black" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <div class="av-dot dot-orange"></div>
+        </div>
+        <div class="item-info">
+          <div class="item-row">
+            <span class="item-name">Dr. Marcus</span>
+            <span class="item-time">Mon</span>
+          </div>
+          <div class="item-prev">The lab results are ready for review.</div>
+        </div>
+      </div>
+
+      <!-- Pharmacy -->
+      <div class="chat-item" data-id="pharmacy" data-title="Pharmacy Support" data-status="Online">
+        <div class="av av-pharma">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <ellipse cx="12" cy="12" rx="7" ry="4.5" transform="rotate(45 12 12)" stroke="#64748b" stroke-width="1.8" fill="#e2e8f0"/>
+            <path d="M7.5 7.5l9 9" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div class="av-dot dot-orange"></div>
+        </div>
+        <div class="item-info">
+          <div class="item-row">
+            <span class="item-name">Pharmacy Support</span>
+            <span class="item-time">Oct 12</span>
+          </div>
+          <div class="item-prev">Your order #8821 has been shipped.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sf-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#1a6ef5" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </div>
+      <p>Your medical data is protected. Only verified health personnel can access your clinical chat history.</p>
+    </div>
+  </div>
+
+  <!-- CHAT AREA -->
+  <div class="chat-area">
+
+    <div class="chat-header">
+      <div class="chat-user-left">
+        <div class="ch-avatar" id="chAvatar">
+          <svg id="chAvatarIcon" width="26" height="26" viewBox="0 0 32 32" fill="none">
+            <rect x="6" y="12" width="20" height="14" rx="3" fill="#1a6ef5"/>
+            <rect x="11" y="7" width="10" height="6" rx="2" fill="#93c5fd"/>
+            <circle cx="12" cy="19" r="2" fill="white"/>
+            <circle cx="20" cy="19" r="2" fill="white"/>
+            <path d="M12 24h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M16 7V5" stroke="#1a6ef5" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="16" cy="4" r="1.5" fill="#1a6ef5"/>
+            <rect x="2" y="15" width="4" height="5" rx="1.5" fill="#93c5fd"/>
+            <rect x="26" y="15" width="4" height="5" rx="1.5" fill="#93c5fd"/>
+          </svg>
+          <div class="ch-dot" id="chDot"></div>
+        </div>
+        <div>
+          <div class="ch-name" id="chatTitle">
+            Nanipal AI Assistant
+            <span class="verified-badge">
+              Verified AI
+            </span>
+          </div>
+          <div class="ch-status" id="chatStatus">Active now</div>
+        </div>
+      </div>
+      <div class="chat-header-right">
+        <button class="escalate-btn" type="button" title="Escalate to Specialist" aria-label="Escalate to Specialist" onclick="window.location.href='jevacare-doctors.html'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="escalate-text">Escalate to Specialist</span>
+        </button>
+        <button class="more-btn" type="button" aria-label="More options">
+          <svg width="4" height="18" viewBox="0 0 4 18" fill="none"><circle cx="2" cy="2" r="1.5" fill="#6b7280"/><circle cx="2" cy="9" r="1.5" fill="#6b7280"/><circle cx="2" cy="16" r="1.5" fill="#6b7280"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-body" id="chatBody"></div>
+
+    <!-- Quick actions -->
+    <div class="quick-actions" id="quickActions">
+      <button class="qa-btn" onclick="sendQuick('Book Follow-up')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="blue" stroke-width="1.8"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Book Follow-up
+      </button>
+      <button class="qa-btn" onclick="sendQuick('Check Symptoms')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2zm0 0v10M7 7h10" stroke="blue" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="7" r="5" stroke="#374151" stroke-width="1.8"/><path d="M9 12l2 2 4-4" stroke="#374151" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Check Symptoms
+      </button>
+      <button class="qa-btn" onclick="sendQuick('Refill Prescription')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="blue" stroke-width="2" stroke-linecap="round"/></svg>
+        Refill Prescription
+      </button>
+      <button class="qa-btn" onclick="sendQuick('Clinic Hours')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="blue" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Clinic Hours
+      </button>
+    </div>
+
+    <!-- Input -->
+    <div class="input-wrap">
+      <div class="input-box">
+        <textarea id="msgInput" placeholder="Describe your health concern or ask Nanipal..." rows="1"></textarea>
+        <div class="input-footer">
+          <div class="input-icons">
+            <button class="icon-btn" title="Attach document" onclick="document.getElementById('fileInput').click()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66L9.64 16.41a2 2 0 0 1-2.83-2.83l8.49-8.48" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt">
+            <button class="icon-btn" title="Add photo" onclick="document.getElementById('imageInput').click()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <input type="file" id="imageInput" accept="image/*">
+            <button class="icon-btn" title="Security info" onclick="showSecurity()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="black" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <span class="md-hint">Markdown supported</span>
+          <button class="send-btn" id="sendBtn" type="button" aria-label="Send message">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22l-4-9-9-4 20-7z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="send-text">Send Message</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      AI recommendations are for informational purposes. For emergencies, please call your local emergency services immediately.
+    </div>
+  </div>
+</div>
+
+<!-- Security modal -->
+<div class="overlay" id="overlay" onclick="closeSecurity()"></div>
+<div class="sec-modal" id="secModal">
+  <svg width="52" height="52" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#1a6ef5" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#1a6ef5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <h3>You are Protected</h3>
+  <p>All messages are end-to-end encrypted. Only you and verified Jevacare health personnel can read this conversation. Your data is never sold or shared.</p>
+  <button onclick="closeSecurity()">Got it</button>
+</div>
+
+<!-- Floating button -->
+<button class="floating-btn" id="openChats">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+/* ── PROTOTYPE DATA ── */
+const PROTO = {
+  sarah: [
+    {f:"bot",  t:"Good morning! I reviewed your recent blood pressure readings. Your average is 128/82 — slightly elevated. Are you taking your morning medication consistently?", ts:"9:00 AM"},
+    {f:"user", t:"Yes I have been, but I sometimes forget on weekends.", ts:"9:05 AM"},
+    {f:"bot",  t:"That's very common. I'd recommend setting a daily phone alarm. Reducing sodium intake can also help bring those numbers down naturally.", ts:"9:07 AM"},
+    {f:"user", t:"Okay. Should I come in for a checkup?", ts:"9:10 AM"},
+    {f:"bot",  t:"Please remember to take your medication as prescribed. I've scheduled a follow-up for next Thursday at 10 AM — please confirm if that works for you.", ts:"9:12 AM"},
+  ],
+  marcus: [
+    {f:"bot",  t:"Hello! Your lab results are ready for review. Your cholesterol levels have improved significantly since your last visit — great progress!", ts:"Mon 2:00 PM"},
+    {f:"user", t:"That's great news! I've been following the diet plan.", ts:"Mon 2:15 PM"},
+    {f:"bot",  t:"Excellent! Your LDL dropped from 145 to 118 mg/dL. Keep up the diet and light exercise routine.", ts:"Mon 2:17 PM"},
+    {f:"user", t:"Do I still need the medication?", ts:"Mon 2:20 PM"},
+    {f:"bot",  t:"The lab results are ready for review. Based on your progress, we can discuss tapering your medication at your next appointment. I'll send a summary report shortly.", ts:"Mon 2:22 PM"},
+  ],
+  pharmacy: [
+    {f:"bot",  t:"Hi! Your order #8821 (Metformin 500mg × 60 tablets) has been dispatched from our warehouse.", ts:"Oct 12"},
+    {f:"user", t:"Great! When will it arrive?", ts:"Oct 12"},
+    {f:"bot",  t:"Your order has been shipped and should arrive within 2–3 business days. A tracking number will be sent via SMS shortly.", ts:"Oct 12"},
+    {f:"user", t:"Thank you!", ts:"Oct 12"},
+    {f:"bot",  t:"You're welcome! Reach out anytime for prescription refills. Have a healthy day! 💊", ts:"Oct 12"},
+  ]
+};
+
+const STAR_SVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="#1a6ef5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+const SHIELD_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#1a6ef5" stroke-width="1.8" stroke-linejoin="round"/></svg>`;
+
+let currentChat = "nanipal";
+const chatBody    = document.getElementById("chatBody");
+const msgInput    = document.getElementById("msgInput");
+const chatTitle   = document.getElementById("chatTitle");
+const chatStatus  = document.getElementById("chatStatus");
+const quickActions= document.getElementById("quickActions");
+const chAvatar    = document.getElementById("chAvatar");
+
+const AV_CFG = {
+  nanipal:  { bg: "#dbeafe", dot: "#22c55e" },
+  sarah:    { bg: "#22c55e", dot: "#f59e0b" },
+  marcus:   { bg: "#22c55e", dot: "#9ca3af" },
+  pharmacy: { bg: "#cbd5e1", dot: "#f59e0b" },
+};
+const DOC_SVG = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8.5" r="3.5" fill="white"/><path d="M5 21c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+const ROBOT_SVG = `<svg width="26" height="26" viewBox="0 0 32 32" fill="none"><rect x="6" y="12" width="20" height="14" rx="3" fill="#1a6ef5"/><rect x="11" y="7" width="10" height="6" rx="2" fill="#93c5fd"/><circle cx="12" cy="19" r="2" fill="white"/><circle cx="20" cy="19" r="2" fill="white"/><path d="M12 24h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M16 7V5" stroke="#1a6ef5" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="4" r="1.5" fill="#1a6ef5"/><rect x="2" y="15" width="4" height="5" rx="1.5" fill="#93c5fd"/><rect x="26" y="15" width="4" height="5" rx="1.5" fill="#93c5fd"/></svg>`;
+const PHARMA_SVG = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="7" ry="4.5" transform="rotate(45 12 12)" stroke="#64748b" stroke-width="1.8" fill="#e2e8f0"/><path d="M7.5 7.5l9 9" stroke="#64748b" stroke-width="2" stroke-linecap="round"/></svg>`;
+
+const AV_ICONS = { nanipal: ROBOT_SVG, sarah: DOC_SVG, marcus: DOC_SVG, pharmacy: PHARMA_SVG };
+
+/* ── SWITCH CHAT ── */
+document.querySelectorAll(".chat-item").forEach(item => {
+  item.onclick = () => {
+    document.querySelectorAll(".chat-item").forEach(i => i.classList.remove("active"));
+    item.classList.add("active");
+    currentChat = item.dataset.id;
+    item.querySelector(".unread")?.remove();
+
+    const isNanipal = currentChat === "nanipal";
+    chatTitle.innerHTML = item.dataset.title + (isNanipal
+      ? ` <span class="verified-badge"><svg width="10" height="10" viewBox="0 0 12 12" fill="#16a34a"><polygon points="6,1 7.5,4.5 11,5 8.5,7.5 9,11 6,9.5 3,11 3.5,7.5 1,5 4.5,4.5"/></svg> Verified AI</span>`
+      : "");
+    chatStatus.textContent = item.dataset.status;
+
+    const cfg = AV_CFG[currentChat];
+    chAvatar.style.background = cfg.bg;
+    chAvatar.innerHTML = AV_ICONS[currentChat] + `<div class="ch-dot" style="background:${cfg.dot}"></div>`;
+
+    quickActions.style.display = isNanipal ? "flex" : "none";
+    msgInput.placeholder = isNanipal ? "Describe your health concern or ask Nanipal..." : `Message ${item.dataset.title}...`;
+
+    renderChat(currentChat);
+    document.getElementById("sidebar").classList.remove("show");
+  };
+});
+
+/* ── RENDER CHAT ── */
+function renderChat(name) {
+  chatBody.innerHTML = `<div class="enc-banner">${SHIELD_SVG} END-TO-END ENCRYPTED HEALTH CONSULTATION</div>`;
+  if (name !== "nanipal" && PROTO[name]) PROTO[name].forEach(m => addMsg(m.t, m.f, m.ts, false));
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+/* ── ADD MESSAGE ── */
+function addMsg(text, type="user", ts=null, animate=true) {
+  const isBot = type === "bot";
+  const time = ts || new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+  const activeName = document.querySelector(".chat-item.active .item-name")?.textContent || "Doctor";
+  const labelText = isBot ? (currentChat === "nanipal" ? "NANIPAL ASSISTANT" : activeName.toUpperCase()) : "";
+
+  const row = document.createElement("div");
+  row.className = `msg-row ${isBot ? "bot" : "user"}`;
+
+  row.innerHTML = (isBot ? `<div class="msg-label">${STAR_SVG} ${labelText}</div>` : "")
+    + `<div class="bubble">${text}</div>`
+    + `<div class="msg-time">${time}${!isBot ? ' &nbsp;<span style="color:#9ca3af">Read</span>' : ""}</div>`;
+
+  if (animate) { row.style.cssText = "opacity:0;transform:translateY(8px)"; }
+  chatBody.appendChild(row);
+  if (animate) requestAnimationFrame(() => { row.style.cssText = "transition:opacity .2s,transform .2s;opacity:1;transform:translateY(0)"; });
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+/* ── TYPING ── */
+function showTyping() {
+  const el = document.createElement("div"); el.className = "typing-row"; el.id = "typingEl";
+  el.innerHTML = `<div class="typing-dots"><span></span><span></span><span></span></div>`;
+  chatBody.appendChild(el); chatBody.scrollTop = chatBody.scrollHeight;
+}
+function rmTyping() { document.getElementById("typingEl")?.remove(); }
+
+function showAnalyzing() {
+  const el = document.createElement("div"); el.className = "analyzing"; el.id = "analyzingEl";
+  el.textContent = "ASSISTANT ANALYZING...";
+  chatBody.appendChild(el); chatBody.scrollTop = chatBody.scrollHeight;
+}
+function rmAnalyzing() { document.getElementById("analyzingEl")?.remove(); }
+
+/* ── SEND ── */
+async function sendMessage() {
+  const text = msgInput.value.trim(); if (!text) return;
+  addMsg(text, "user");
+  msgInput.value = ""; msgInput.style.height = "auto";
+
+  if (currentChat !== "nanipal") { fakeReply(); return; }
+
+  showAnalyzing(); showTyping();
+  try {
+    const res = await fetch("http://localhost:3000/chat", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({message: text})
+    });
+    const data = await res.json();
+    rmAnalyzing(); rmTyping();
+    typeReply(data.reply || "Could you give me more details?");
+  } catch {
+    rmAnalyzing(); rmTyping();
+    addMsg("I'm having trouble connecting right now. Please try again shortly.", "bot");
+  }
+}
+
+function fakeReply() {
+  showTyping();
+  const r = ["I'll review your case shortly.","Thank you for the update. I'll note this in your file.",
+    "Understood. I'll send you an updated care plan by end of day.",
+    "Please reach out if your condition changes.",
+    "You're doing well — keep following the plan."];
+  setTimeout(() => { rmTyping(); addMsg(r[Math.floor(Math.random()*r.length)], "bot"); }, 950);
+}
+
+function typeReply(text) {
+  const time = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+  const row = document.createElement("div"); row.className = "msg-row bot";
+  row.innerHTML = `<div class="msg-label">${STAR_SVG} NANIPAL ASSISTANT</div><div class="bubble"></div><div class="msg-time">${time}</div>`;
+  chatBody.appendChild(row);
+  const bubble = row.querySelector(".bubble");
+  let i = 0;
+  const iv = setInterval(() => { bubble.textContent += text[i++]; chatBody.scrollTop = chatBody.scrollHeight; if (i >= text.length) clearInterval(iv); }, 14);
+}
+
+function sendQuick(label) { msgInput.value = label; sendMessage(); }
+
+/* ── FILES ── */
+document.getElementById("fileInput").addEventListener("change", function() {
+  if (!this.files[0]) return;
+  addMsg(`📎 <em>Attached: ${this.files[0].name}</em>`, "user");
+  if (currentChat === "nanipal") { showTyping(); setTimeout(() => { rmTyping(); addMsg("I've received your document. Give me a moment to review and share my observations.", "bot"); }, 1300); }
+  else fakeReply(); this.value = "";
+});
+document.getElementById("imageInput").addEventListener("change", function() {
+  if (!this.files[0]) return;
+  const url = URL.createObjectURL(this.files[0]);
+  const time = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+  const row = document.createElement("div"); row.className = "msg-row user";
+  row.innerHTML = `<img src="${url}" style="max-width:220px;border-radius:12px;" alt=""/><div class="msg-time">${time} &nbsp;<span style="color:#9ca3af">Read</span></div>`;
+  chatBody.appendChild(row); chatBody.scrollTop = chatBody.scrollHeight;
+  if (currentChat === "nanipal") { showTyping(); setTimeout(() => { rmTyping(); addMsg("Thanks for sharing. I'd recommend a specialist follow-up for a thorough evaluation. Shall I book an appointment?", "bot"); }, 1400); }
+  else fakeReply(); this.value = "";
+});
+
+/* ── SECURITY ── */
+function showSecurity() { document.getElementById("secModal").classList.add("show"); document.getElementById("overlay").classList.add("show"); }
+function closeSecurity() { document.getElementById("secModal").classList.remove("show"); document.getElementById("overlay").classList.remove("show"); }
+
+/* ── EVENTS ── */
+document.getElementById("sendBtn").onclick = sendMessage;
+msgInput.addEventListener("keypress", e => { if (e.key==="Enter"&&!e.shiftKey) { e.preventDefault(); sendMessage(); } });
+msgInput.addEventListener("input", () => { msgInput.style.height="auto"; msgInput.style.height=msgInput.scrollHeight+"px"; });
+document.getElementById("searchChat").addEventListener("input", function() {
+  const v = this.value.toLowerCase();
+  document.querySelectorAll(".chat-item").forEach(i => { i.style.display = i.textContent.toLowerCase().includes(v)?"flex":"none"; });
+});
+document.getElementById("openChats").onclick = () => document.getElementById("sidebar").classList.toggle("show");
+document.getElementById("menuToggle").onclick = () => document.getElementById("mobileNav").classList.toggle("open");
+
+/* ── INIT ── */
+(function() {
+  chatBody.innerHTML = `<div class="enc-banner">${SHIELD_SVG} END-TO-END ENCRYPTED HEALTH CONSULTATION</div>`;
+
+  const r1 = document.createElement("div"); r1.className = "msg-row bot";
+  r1.innerHTML = `<div class="msg-label">${STAR_SVG} NANIPAL ASSISTANT</div><div class="bubble">Hello John! I've been monitoring your latest health stats from your connected wearable device. I noticed your heart rate was slightly elevated this morning.</div><div class="msg-time">10:30 AM</div>`;
+  chatBody.appendChild(r1);
+
+  const r2 = document.createElement("div"); r2.className = "msg-row user";
+  r2.innerHTML = `<div class="bubble">Yes, I noticed that too. I've also been having a mild headache since I woke up. Should I be worried?</div><div class="msg-time">10:32 AM &nbsp;<span style="color:#9ca3af">Read</span></div>`;
+  chatBody.appendChild(r2);
+
+  setTimeout(() => {
+    const a = document.createElement("div"); a.className = "analyzing"; a.textContent = "ASSISTANT ANALYZING...";
+    chatBody.appendChild(a); chatBody.scrollTop = chatBody.scrollHeight;
+    setTimeout(() => {
+      a.remove();
+      const r3 = document.createElement("div"); r3.className = "msg-row bot";
+      r3.innerHTML = `<div class="msg-label">${STAR_SVG} NANIPAL ASSISTANT</div><div class="bubble">Based on your history of mild tension headaches and the slight HR increase, it's likely related to hydration or stress. Have you had your morning water intake yet?</div><div class="msg-time">10:34 AM</div>`;
+      chatBody.appendChild(r3);
+      const r4 = document.createElement("div"); r4.className = "msg-row bot";
+      r4.innerHTML = `<div class="msg-label">${STAR_SVG} NANIPAL ASSISTANT</div><div class="bubble">I've also prepared some quick actions for you below. Would you like to check your recent lab results or schedule a quick screening?</div><div class="msg-time">10:34 AM</div>`;
+      chatBody.appendChild(r4);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }, 1600);
+  }, 300);
+})();
+</script>
+</body>
+</html>

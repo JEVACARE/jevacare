@@ -1,0 +1,305 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    }
+    
+    body{
+    font-family:'Inter',sans-serif;
+    background:#f6f7fb;
+    color:#111;
+    }
+    
+    /* HEADER */
+    
+    .header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 40px;
+    background:white;
+    border-bottom:1px solid #eee;
+    }
+    
+    .header-left{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    }
+    
+    .logo{
+    width:34px;
+    }
+    
+    .brand{
+    font-weight:700;
+    color:#2f55ff;
+    }
+    
+    nav{
+    display:flex;
+    gap:20px;
+    }
+    
+    nav a{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:#555;
+    }
+    
+    nav img{
+    width:16px;
+    }
+    
+    .active{
+    background:#eef2ff;
+    padding:8px 14px;
+    border-radius:20px;
+    color:#2f55ff;
+    }
+    
+    .header-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    }
+    
+    .bell{
+    width:18px;
+    }
+    
+    .user{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    }
+    
+    .avatar{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:#9ef01a;
+    }
+    
+    .user-info span{
+    font-size:12px;
+    color:#777;
+    display:block;
+    }
+    
+    /* STEPS */
+    
+    .steps{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-top:30px;
+    }
+    
+    .step{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#ddd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    }
+    
+    .step.active{
+    background:#2f55ff;
+    color:white;
+    }
+    
+    .line{
+    width:70px;
+    height:3px;
+    background:#ddd;
+    }
+    
+    .line.active{
+    background:#2f55ff;
+    }
+    
+    .step-labels{
+    display:flex;
+    justify-content:center;
+    gap:70px;
+    font-size:11px;
+    margin-top:8px;
+    color:#666;
+    }
+    
+    /* LAYOUT */
+    
+    .booking{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:40px;
+    padding:50px;
+    }
+    
+    /* GRID */
+    
+    .booking-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    }
+    
+    /* CARDS */
+    
+    .card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 6px 14px rgba(0,0,0,0.05);
+    }
+    
+    .card-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+    margin-bottom:15px;
+    }
+    
+    .card-title img{
+    width:16px;
+    }
+    
+    /* CALENDAR */
+    
+    .calendar-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+    }
+    
+    .days,.dates{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px;
+    text-align:center;
+    }
+    
+    .dates span{
+    padding:8px;
+    border-radius:8px;
+    cursor:pointer;
+    }
+    
+    .selected{
+    background:#2f55ff;
+    color:white;
+    }
+    
+    /* SLOTS */
+    
+    .slots{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    }
+    
+    .slots button{
+    padding:10px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    background:white;
+    cursor:pointer;
+    }
+    
+    .slots button.selected{
+    background:#2f55ff;
+    color:white;
+    border:none;
+    }
+    
+    /* NANIPAL */
+    
+    .nanipal{
+    margin-top:18px;
+    background:#eef2ff;
+    padding:14px;
+    border-radius:10px;
+    font-size:13px;
+    }
+    
+    /* SIDE */
+    
+    .side{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    }
+    
+    .assistant{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    }
+    
+    .assistant ul{
+    margin-left:16px;
+    margin-top:10px;
+    }
+    
+    .policy{
+    margin-top:12px;
+    background:#f7f7f7;
+    padding:10px;
+    border-radius:8px;
+    font-size:13px;
+    }
+    
+    .side-card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    }
+    
+    .side-card img{
+    width:24px;
+    margin-bottom:10px;
+    }
+    
+    /* BUTTONS */
+    
+    .actions{
+    display:flex;
+    justify-content:space-between;
+    margin-top:30px;
+    }
+    
+    .back{
+    background:none;
+    border:none;
+    }
+    
+    .continue{
+    background:#9ef01a;
+    border:none;
+    padding:12px 28px;
+    border-radius:24px;
+    font-weight:600;
+    }
+    
+    /* RESPONSIVE */
+    
+    @media(max-width:1000px){
+    
+    .booking{
+    grid-template-columns:1fr;
+    }
+    
+    .booking-grid{
+    grid-template-columns:1fr;
+    }
+    
+    }
