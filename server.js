@@ -172,7 +172,7 @@ app.get("/appointment", (req, res) => {
   res.sendFile(path.join(__dirname, "appointment.html"));
 });
 
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
