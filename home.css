@@ -200,26 +200,7 @@
     position:relative;
     }
 
-    .hero-title .typing-text::after{
-    content:'';
-    display:inline-block;
-    width:2px;
-    height:1em;
-    margin-left:6px;
-    background:#2f55ff;
-    border-radius:1px;
-    transform:translateY(0.12em);
-    opacity:0;
-    animation:caretBlink 900ms step-end infinite;
-    }
-
-    .hero-title .title-line.is-typing .typing-text::after{
-    opacity:1;
-    }
-
-    .hero-title .title-line.is-done .typing-text::after{
-    opacity:0;
-    }
+    
 
     .blue{
     color:#2f55ff;
